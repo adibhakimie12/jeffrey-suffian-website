@@ -56,15 +56,15 @@ const nav = [
   ['Contact', '/contact']
 ];
 
-const trustBadges = ['AF001963', 'MIA Member Firm', 'Approved Audit Firm', 'Tax Agency Firm'];
+const trustBadges = ['AF001963', 'MIA Member Firm', 'Ministry of Finance Licensed', 'Petaling Jaya, Selangor'];
 const serviceIcons = [FileCheck2, CircleDollarSign, BriefcaseBusiness, Scale, ShieldCheck, Landmark, BriefcaseBusiness];
 
 const services: Service[] = [
   {
     slug: 'statutory-audit-assurance',
     path: '/services/statutory-audit-assurance',
-    title: 'Statutory Audit & Assurance | Jeffrey Suffian',
-    description: 'Statutory audit and assurance services for Malaysian companies from an approved audit firm in Petaling Jaya.',
+    title: 'Statutory Audit & Assurance Services Malaysia | Jeffrey Suffian',
+    description: 'Partner-led statutory audit and assurance services for Malaysian businesses from a Chartered Accountants firm in Petaling Jaya.',
     h1: 'Statutory Audit & Assurance',
     seoFocus: 'statutory audit Malaysia, audit firm Petaling Jaya',
     overview: 'Independent audit and assurance services to support directors, shareholders and stakeholders with reliable financial reporting.',
@@ -79,8 +79,8 @@ const services: Service[] = [
   {
     slug: 'tax-compliance-advisory',
     path: '/services/tax-compliance-advisory',
-    title: 'Tax Compliance & Advisory | Jeffrey Suffian',
-    description: 'Tax compliance and advisory support for Malaysian businesses from a tax agency firm in Petaling Jaya.',
+    title: 'Tax Compliance & Advisory Malaysia | Jeffrey Suffian',
+    description: 'Tax compliance, tax computation, tax planning and advisory support for Malaysian companies and SMEs.',
     h1: 'Tax Compliance & Advisory',
     seoFocus: 'tax compliance Malaysia, tax agent Petaling Jaya',
     overview: 'Tax compliance and advisory support for Malaysian businesses, including tax returns, computations, planning and submission support.',
@@ -95,8 +95,8 @@ const services: Service[] = [
   {
     slug: 'business-advisory',
     path: '/services/business-advisory',
-    title: 'Business Advisory | Jeffrey Suffian',
-    description: 'Business advisory support for Malaysian directors, management teams and owner-managed companies.',
+    title: 'Business Advisory Services Malaysia | Jeffrey Suffian',
+    description: 'Practical business advisory support for directors, management teams, shareholders and growing Malaysian businesses.',
     h1: 'Business Advisory',
     seoFocus: 'business advisory Malaysia',
     overview: 'Practical advisory support for directors, management teams and stakeholders making financial and operational decisions.',
@@ -111,8 +111,8 @@ const services: Service[] = [
   {
     slug: 'due-diligence-valuation',
     path: '/services/due-diligence-valuation',
-    title: 'Due Diligence & Business Valuation | Jeffrey Suffian',
-    description: 'Due diligence and business valuation support for acquisitions, investments and restructuring decisions in Malaysia.',
+    title: 'Due Diligence & Business Valuation Malaysia | Jeffrey Suffian',
+    description: 'Financial due diligence, business valuation and transaction advisory support for acquisitions, investments and restructuring.',
     h1: 'Due Diligence & Business Valuation',
     seoFocus: 'due diligence Malaysia, business valuation Malaysia',
     overview: 'Transaction-focused support for acquisitions, investments, restructuring and business decisions.',
@@ -127,8 +127,8 @@ const services: Service[] = [
   {
     slug: 'corporate-recovery',
     path: '/services/corporate-recovery',
-    title: 'Corporate Recovery | Jeffrey Suffian',
-    description: 'Corporate recovery, restructuring and closure-related support for Malaysian companies facing financial pressure.',
+    title: 'Corporate Recovery & Liquidation Services Malaysia | Jeffrey Suffian',
+    description: 'Corporate recovery, turnaround, voluntary winding up, liquidation, receivership and debt restructuring advisory support.',
     h1: 'Corporate Recovery',
     seoFocus: 'corporate recovery Malaysia, liquidation services Malaysia',
     overview: 'Support for companies facing financial pressure, restructuring needs, recovery processes or closure-related matters.',
@@ -143,8 +143,8 @@ const services: Service[] = [
   {
     slug: 'corporate-finance',
     path: '/services/corporate-finance',
-    title: 'Corporate Finance | Jeffrey Suffian',
-    description: 'Corporate finance advisory for mergers, acquisitions, restructuring, valuation and growth decisions in Malaysia.',
+    title: 'Corporate Finance Advisory Malaysia | Jeffrey Suffian',
+    description: 'Corporate finance advisory for mergers, acquisitions, restructuring, valuation and business growth decisions.',
     h1: 'Corporate Finance',
     seoFocus: 'corporate finance advisory Malaysia',
     overview: 'Advisory support for mergers, acquisitions, restructuring, valuation and growth decisions.',
@@ -159,8 +159,8 @@ const services: Service[] = [
   {
     slug: 'sme-advisory',
     path: '/services/sme-advisory',
-    title: 'SME Advisory | Jeffrey Suffian',
-    description: 'SME advisory and accounting support for owner-managed businesses in Malaysia.',
+    title: 'SME Advisory Services Malaysia | Jeffrey Suffian',
+    description: 'Financial and commercial advisory support for SMEs, owner-managed businesses and entrepreneurs in Malaysia.',
     h1: 'SME Advisory',
     seoFocus: 'SME advisory Malaysia, accounting advisory for SMEs',
     overview: 'Commercial and financial advisory support for SMEs and owner-managed businesses.',
@@ -221,8 +221,8 @@ const insights = [
 const basePages: Record<string, PageMeta> = {
   '/': {
     path: '/',
-    title: 'Jeffrey Suffian | Chartered Accountants Petaling Jaya',
-    description: 'Partner-led audit, tax and advisory services for Malaysian businesses from Jeffrey Suffian, Chartered Accountants in Petaling Jaya.',
+    title: 'Jeffrey Suffian | Chartered Accountants in Petaling Jaya',
+    description: 'Jeffrey Suffian is a Chartered Accountants firm in Petaling Jaya providing statutory audit, tax compliance, business advisory, due diligence, valuation and corporate recovery services.',
     h1: 'Partner-Led Audit, Tax & Advisory for Malaysian Businesses.'
   },
   '/about': {
@@ -439,6 +439,11 @@ function PageHero({ page, eyebrow = 'Jeffrey Suffian' }: { page: PageMeta; eyebr
         <h1 className="mt-4 max-w-4xl font-serif text-4xl font-bold leading-tight sm:text-5xl">{page.h1}</h1>
         <p className="mt-5 max-w-2xl text-sm leading-7 text-ivory/66">{page.description}</p>
         <div className="mt-7"><TrustBadges dark /></div>
+        {page.path.startsWith('/services/') && (
+          <div className="mt-7">
+            <AppLink href="/contact" event="service_page_cta_click" className="inline-flex min-h-11 items-center rounded bg-champagne px-6 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</AppLink>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -449,13 +454,13 @@ function Section({ children, tone = 'ivory', className = '' }: { children: React
   return <section className={`${bg} py-16 lg:py-20 ${className}`}><div className="mx-auto max-w-7xl px-5 lg:px-8">{children}</div></section>;
 }
 
-function CTA({ dark = false, label = 'Request Consultation' }: { dark?: boolean; label?: string }) {
+function CTA({ dark = false, label = 'Need an audit, tax or advisory partner?', body = 'Speak with our team in Petaling Jaya to discuss your requirements.', event = 'request_consultation_click' }: { dark?: boolean; label?: string; body?: string; event?: string }) {
   return (
     <div className={`rounded-lg border p-8 ${dark ? 'border-white/10 bg-white/[0.035]' : 'border-champagne/20 bg-white'}`}>
       <h2 className="font-serif text-3xl">{label}</h2>
-      <p className={`mt-3 max-w-2xl text-sm leading-7 ${dark ? 'text-ivory/62' : 'text-charcoal/62'}`}>Speak with our team about your statutory, tax or advisory timeline.</p>
+      <p className={`mt-3 max-w-2xl text-sm leading-7 ${dark ? 'text-ivory/62' : 'text-charcoal/62'}`}>{body}</p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <AppLink href="/contact" event="request_consultation_click" className="flex min-h-11 items-center justify-center rounded bg-champagne px-6 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</AppLink>
+        <AppLink href="/contact" event={event} className="flex min-h-11 items-center justify-center rounded bg-champagne px-6 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</AppLink>
         <a href={firm.phoneHref} data-event="phone_click" className={`flex min-h-11 items-center justify-center rounded border px-6 text-xs font-bold uppercase tracking-wide ${dark ? 'border-white/14 text-ivory' : 'border-charcoal/10 text-charcoal'}`}>{firm.phone}</a>
       </div>
     </div>
@@ -463,7 +468,6 @@ function CTA({ dark = false, label = 'Request Consultation' }: { dark?: boolean;
 }
 
 function HomePage() {
-  const page = basePages['/'];
   return (
     <>
       <section id="home" className="bg-obsidian pt-20 text-ivory">
@@ -495,7 +499,7 @@ function HomePage() {
         </div>
         <div id="trust-marquee" className="relative overflow-hidden border-y border-white/8 bg-navy py-5">
           <div className="animate-trust-marquee flex w-max gap-4 px-4">
-            {[...trustBadges, 'Licensed by Ministry of Finance', 'Petaling Jaya, Selangor', ...trustBadges, 'Licensed by Ministry of Finance', 'Petaling Jaya, Selangor'].map((item, index) => (
+            {[...trustBadges, 'Approved Audit Firm', 'Tax Agency Firm', ...trustBadges, 'Approved Audit Firm', 'Tax Agency Firm'].map((item, index) => (
               <span key={`${item}-${index}`} className="flex min-w-max items-center gap-3 rounded-full border border-white/10 bg-white/[0.045] px-5 py-3 text-[11px] font-extrabold uppercase tracking-wide text-ivory/72"><span className="h-2 w-2 rounded-full bg-champagne" />{item}</span>
             ))}
           </div>
@@ -505,8 +509,33 @@ function HomePage() {
       <Section tone="white"><ServiceCards limit={3} /></Section>
       <WhySection />
       <PeoplePreview />
-      <Section tone="navy"><CTA dark label="Ready to elevate your financial governance?" /></Section>
+      <Section tone="navy"><CTA dark /></Section>
+      <InsightsPreview />
     </>
+  );
+}
+
+function InsightsPreview() {
+  return (
+    <Section tone="ivory" className="py-12 lg:py-14">
+      <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-widest text-champagne">Insights</p>
+          <h2 className="mt-2 font-serif text-2xl text-obsidian">Practical updates for business owners, directors and decision-makers.</h2>
+        </div>
+        <AppLink href="/insights" event="blog_cta_click" className="text-xs font-bold uppercase tracking-wider text-obsidian underline decoration-champagne decoration-2 underline-offset-8">View Insights</AppLink>
+      </div>
+      <div className="mt-8 grid gap-4 md:grid-cols-3">
+        {insights.slice(0, 3).map(([category, title, excerpt, href]) => (
+          <article key={title} className="border border-champagne/15 bg-white/70 p-5">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-champagne">{category}</p>
+            <h3 className="mt-3 font-serif text-lg text-obsidian">{title}</h3>
+            <p className="mt-2 text-xs leading-6 text-charcoal/58">{excerpt}</p>
+            <a href={href} data-event="blog_cta_click" className="mt-4 inline-flex text-[10px] font-bold uppercase tracking-wider text-obsidian">Read More</a>
+          </article>
+        ))}
+      </div>
+    </Section>
   );
 }
 
@@ -556,7 +585,7 @@ function ServicesHub({ page }: { page: PageMeta }) {
 }
 
 function ServicePage({ service }: { service: Service }) {
-  return <><PageHero page={service} eyebrow={service.seoFocus} /><Section><div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]"><h2 className="font-serif text-3xl text-obsidian">Service overview</h2><p className="text-sm leading-7 text-charcoal/65">{service.overview}</p></div></Section><Section tone="white"><TwoColumn title="What We Support" items={service.support} title2="Who This Is For" items2={service.audience} /></Section><Section><FAQ faqs={service.faqs} /></Section><Section tone="navy"><CTA dark /></Section></>;
+  return <><PageHero page={service} eyebrow={service.seoFocus} /><Section><div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]"><h2 className="font-serif text-3xl text-obsidian">Service overview</h2><p className="text-sm leading-7 text-charcoal/65">{service.overview}</p></div></Section><Section tone="white"><TwoColumn title="What We Support" items={service.support} title2="Who This Is For" items2={service.audience} /></Section><Section><FAQ faqs={service.faqs} /></Section><Section tone="navy"><CTA dark event="service_page_cta_click" /></Section></>;
 }
 
 function TwoColumn({ title, items, title2, items2 }: { title: string; items: string[]; title2: string; items2: string[] }) {
@@ -580,7 +609,10 @@ function IndustriesPage({ page }: { page: PageMeta }) {
 }
 
 function InsightsPage({ page }: { page: PageMeta }) {
-  return <><PageHero page={page} /><Section><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{insights.map(([category, title, excerpt, href]) => <article key={title} className="border border-champagne/20 bg-white p-7"><p className="text-[11px] font-bold uppercase tracking-widest text-champagne">{category}</p><h2 className="mt-3 font-serif text-xl text-obsidian">{title}</h2><p className="mt-3 text-xs leading-6 text-charcoal/62">{excerpt}</p><a href={href} data-event="blog_cta_click" className="mt-5 inline-flex text-[11px] font-bold uppercase tracking-wider">Read More</a></article>)}</div></Section></>;
+  return <><PageHero page={page} /><Section><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{insights.map(([category, title, excerpt, href], index) => {
+    const relatedService = services[index % services.length];
+    return <article key={title} className="border border-champagne/20 bg-white p-7"><p className="text-[11px] font-bold uppercase tracking-widest text-champagne">{category}</p><h2 className="mt-3 font-serif text-xl text-obsidian">{title}</h2><p className="mt-3 text-xs leading-6 text-charcoal/62">{excerpt}</p><div className="mt-5 flex flex-wrap gap-4"><a href={href} data-event="blog_cta_click" className="inline-flex text-[11px] font-bold uppercase tracking-wider">Read More</a><a href={relatedService.path} className="inline-flex text-[11px] font-bold uppercase tracking-wider text-charcoal/55">Related Service</a></div></article>;
+  })}</div></Section></>;
 }
 
 function ContactPage({ page }: { page: PageMeta }) {

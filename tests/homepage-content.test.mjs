@@ -12,7 +12,7 @@ assert.match(app, /Petaling Jaya/);
 assert.match(app, /Partner-Led/);
 assert.match(app, /hero-widget-audit/);
 assert.match(app, /Our Partners/);
-assert.match(app, /Ready to elevate your financial governance/);
+assert.match(app, /Need an audit, tax or advisory partner/);
 assert.match(app, /mario-gogh-office\.jpg/);
 assert.match(app, /animate-float-subtle/);
 assert.match(app, /trust-marquee/);

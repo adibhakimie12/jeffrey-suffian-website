@@ -2,6 +2,12 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 
 const app = readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8');
+const index = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+const analytics = readFileSync(new URL('../analytics-events.md', import.meta.url), 'utf8');
+
+assert.doesNotMatch(index, /My Google AI Studio App/);
+assert.match(index, /Jeffrey Suffian \| Chartered Accountants in Petaling Jaya/);
+assert.match(index, /Partner-led audit, tax and advisory services for Malaysian businesses/);
 
 const routes = [
   '/',
@@ -52,3 +58,23 @@ for (const file of [
 ]) {
   assert.equal(existsSync(new URL(file, import.meta.url)), true, `${file} should exist`);
 }
+
+for (const term of [
+  'Statutory Audit & Assurance Services Malaysia | Jeffrey Suffian',
+  'Tax Compliance & Advisory Malaysia | Jeffrey Suffian',
+  'Business Advisory Services Malaysia | Jeffrey Suffian',
+  'Due Diligence & Business Valuation Malaysia | Jeffrey Suffian',
+  'Corporate Recovery & Liquidation Services Malaysia | Jeffrey Suffian',
+  'Corporate Finance Advisory Malaysia | Jeffrey Suffian',
+  'SME Advisory Services Malaysia | Jeffrey Suffian',
+  'Need an audit, tax or advisory partner?',
+  'Practical updates for business owners, directors and decision-makers.',
+  'View Insights',
+  'data-event="service_page_cta_click"'
+]) {
+  assert.match(app, new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+}
+
+assert.match(analytics, /Recommended GA4 conversion status/);
+assert.match(analytics, /request_consultation_click/);
+assert.match(analytics, /scroll_75/);

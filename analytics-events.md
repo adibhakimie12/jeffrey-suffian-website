@@ -10,19 +10,26 @@
 
 ## Planned Events
 
-| Event | Trigger | Attribute |
-| --- | --- | --- |
-| page_view | Page route changes | automatic future GA4 |
-| contact_form_submit | Contact form submit button | `data-event="contact_form_submit"` |
-| phone_click | Phone links | `data-event="phone_click"` |
-| email_click | Future email links | `data-event="email_click"` |
-| request_consultation_click | Primary CTA links | `data-event="request_consultation_click"` |
-| service_page_cta_click | Service page CTA links | `data-event="service_page_cta_click"` |
-| partner_profile_view | People profile links | `data-event="partner_profile_view"` |
-| insight_article_view | Future article pages | route based |
-| blog_cta_click | Insight cards | `data-event="blog_cta_click"` |
-| scroll_75 | 75 percent scroll depth | future GTM trigger |
+| Event name | Trigger | Recommended GA4 conversion status | Where it appears |
+| --- | --- | --- | --- |
+| page_view | Route/page load | No | All pages |
+| request_consultation_click | Primary Request Consultation CTA | Yes | Header, homepage hero, final CTA, mobile sticky CTA |
+| contact_form_submit | Contact form submit button | Yes | `/contact` |
+| phone_click | Phone number links | Yes | Footer, CTA blocks, contact page |
+| email_click | Future email links | No | Future footer/contact links |
+| service_page_cta_click | Service landing page CTA | Yes | All `/services/*` pages |
+| partner_profile_view | Partner profile links | No | Homepage partner preview, `/our-people` |
+| blog_cta_click | Insights card links and View Insights CTA | No | Homepage insights preview, `/insights` |
+| scroll_75 | 75 percent page scroll | No | Future GTM scroll trigger |
 
-## Notes
+## Data Attributes
+
+- `data-event="request_consultation_click"`
+- `data-event="contact_form_submit"`
+- `data-event="phone_click"`
+- `data-event="email_click"`
+- `data-event="service_page_cta_click"`
+- `data-event="partner_profile_view"`
+- `data-event="blog_cta_click"`
 
 Keep event names stable before connecting GA4 or Google Ads conversions.
