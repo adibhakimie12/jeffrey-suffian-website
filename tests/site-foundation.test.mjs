@@ -70,6 +70,9 @@ for (const term of [
   'Need an audit, tax or advisory partner?',
   'Practical updates for business owners, directors and decision-makers.',
   'View Insights',
+  'insightIcons',
+  'industryIcons',
+  'contactIcons',
   'data-event="service_page_cta_click"'
 ]) {
   assert.match(app, new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));

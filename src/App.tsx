@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowRight, BriefcaseBusiness, ChevronDown, CircleDollarSign, FileCheck2, Landmark, Menu, Phone, Scale, ShieldCheck, X } from 'lucide-react';
+import { ArrowRight, BookOpenCheck, BriefcaseBusiness, Building2, ChevronDown, CircleDollarSign, Factory, FileCheck2, Landmark, Lightbulb, Mail, MapPin, Menu, Phone, Scale, ShieldCheck, TrendingUp, X } from 'lucide-react';
 
 const SITE_URL = 'https://www.jeffreysuffian.com';
 const GTM_ID = 'Google Tag Manager ID';
@@ -58,6 +58,9 @@ const nav = [
 
 const trustBadges = ['AF001963', 'MIA Member Firm', 'Ministry of Finance Licensed', 'Petaling Jaya, Selangor'];
 const serviceIcons = [FileCheck2, CircleDollarSign, BriefcaseBusiness, Scale, ShieldCheck, Landmark, BriefcaseBusiness];
+const insightIcons = [BookOpenCheck, FileCheck2, CircleDollarSign, Scale, TrendingUp, Landmark];
+const industryIcons = [Factory, Building2, Lightbulb, Landmark, BriefcaseBusiness, Scale];
+const contactIcons = { Address: MapPin, Phone, Hours: BookOpenCheck };
 
 const services: Service[] = [
   {
@@ -526,14 +529,18 @@ function InsightsPreview() {
         <AppLink href="/insights" event="blog_cta_click" className="text-xs font-bold uppercase tracking-wider text-obsidian underline decoration-champagne decoration-2 underline-offset-8">View Insights</AppLink>
       </div>
       <div className="mt-8 grid gap-4 md:grid-cols-3">
-        {insights.slice(0, 3).map(([category, title, excerpt, href]) => (
+        {insights.slice(0, 3).map(([category, title, excerpt, href], index) => {
+          const Icon = insightIcons[index] ?? BookOpenCheck;
+          return (
           <article key={title} className="border border-champagne/15 bg-white/70 p-5">
+            <div className="mb-4 flex h-8 w-8 items-center justify-center rounded bg-obsidian text-champagne"><Icon className="h-3.5 w-3.5" /></div>
             <p className="text-[10px] font-bold uppercase tracking-widest text-champagne">{category}</p>
             <h3 className="mt-3 font-serif text-lg text-obsidian">{title}</h3>
             <p className="mt-2 text-xs leading-6 text-charcoal/58">{excerpt}</p>
             <a href={href} data-event="blog_cta_click" className="mt-4 inline-flex text-[10px] font-bold uppercase tracking-wider text-obsidian">Read More</a>
           </article>
-        ))}
+          );
+        })}
       </div>
     </Section>
   );
@@ -605,13 +612,14 @@ function PeoplePage({ page }: { page: PageMeta }) {
 }
 
 function IndustriesPage({ page }: { page: PageMeta }) {
-  return <><PageHero page={page} /><Section tone="white"><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{industries.map(([name, desc, href]) => <a key={name} href={href} className="border border-gray-100 bg-white p-7"><h2 className="font-serif text-xl text-obsidian">{name}</h2><p className="mt-3 text-xs leading-6 text-charcoal/62">{desc}</p><span className="mt-5 inline-flex text-[11px] font-bold uppercase tracking-wider">Relevant Services</span></a>)}</div></Section></>;
+  return <><PageHero page={page} /><Section tone="white"><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{industries.map(([name, desc, href], index) => { const Icon = industryIcons[index] ?? BriefcaseBusiness; return <a key={name} href={href} className="border border-gray-100 bg-white p-7"><div className="mb-5 flex h-10 w-10 items-center justify-center rounded bg-obsidian text-champagne"><Icon className="h-4.5 w-4.5" /></div><h2 className="font-serif text-xl text-obsidian">{name}</h2><p className="mt-3 text-xs leading-6 text-charcoal/62">{desc}</p><span className="mt-5 inline-flex text-[11px] font-bold uppercase tracking-wider">Relevant Services</span></a>; })}</div></Section></>;
 }
 
 function InsightsPage({ page }: { page: PageMeta }) {
   return <><PageHero page={page} /><Section><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{insights.map(([category, title, excerpt, href], index) => {
     const relatedService = services[index % services.length];
-    return <article key={title} className="border border-champagne/20 bg-white p-7"><p className="text-[11px] font-bold uppercase tracking-widest text-champagne">{category}</p><h2 className="mt-3 font-serif text-xl text-obsidian">{title}</h2><p className="mt-3 text-xs leading-6 text-charcoal/62">{excerpt}</p><div className="mt-5 flex flex-wrap gap-4"><a href={href} data-event="blog_cta_click" className="inline-flex text-[11px] font-bold uppercase tracking-wider">Read More</a><a href={relatedService.path} className="inline-flex text-[11px] font-bold uppercase tracking-wider text-charcoal/55">Related Service</a></div></article>;
+    const Icon = insightIcons[index] ?? BookOpenCheck;
+    return <article key={title} className="border border-champagne/20 bg-white p-7"><div className="mb-5 flex h-10 w-10 items-center justify-center rounded bg-obsidian text-champagne"><Icon className="h-4.5 w-4.5" /></div><p className="text-[11px] font-bold uppercase tracking-widest text-champagne">{category}</p><h2 className="mt-3 font-serif text-xl text-obsidian">{title}</h2><p className="mt-3 text-xs leading-6 text-charcoal/62">{excerpt}</p><div className="mt-5 flex flex-wrap gap-4"><a href={href} data-event="blog_cta_click" className="inline-flex text-[11px] font-bold uppercase tracking-wider">Read More</a><a href={relatedService.path} className="inline-flex text-[11px] font-bold uppercase tracking-wider text-charcoal/55">Related Service</a></div></article>;
   })}</div></Section></>;
 }
 
@@ -624,7 +632,8 @@ function FormInput({ label, type = 'text' }: { label: string; type?: string }) {
 }
 
 function Info({ title, body, link }: { title: string; body: string; link?: string }) {
-  return <div className="border border-champagne/20 bg-white p-6"><h2 className="text-xs font-bold uppercase tracking-widest text-champagne">{title}</h2>{link ? <a href={link} data-event="phone_click" className="mt-2 block text-sm leading-6 text-charcoal/70">{body}</a> : <p className="mt-2 text-sm leading-6 text-charcoal/70">{body}</p>}</div>;
+  const Icon = contactIcons[title as keyof typeof contactIcons] ?? Mail;
+  return <div className="border border-champagne/20 bg-white p-6"><div className="mb-4 flex h-9 w-9 items-center justify-center rounded bg-obsidian text-champagne"><Icon className="h-4 w-4" /></div><h2 className="text-xs font-bold uppercase tracking-widest text-champagne">{title}</h2>{link ? <a href={link} data-event="phone_click" className="mt-2 block text-sm leading-6 text-charcoal/70">{body}</a> : <p className="mt-2 text-sm leading-6 text-charcoal/70">{body}</p>}</div>;
 }
 
 function PrivacyPage({ page }: { page: PageMeta }) {
