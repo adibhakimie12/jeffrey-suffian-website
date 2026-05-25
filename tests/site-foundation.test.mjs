@@ -85,3 +85,7 @@ for (const term of [
 assert.match(analytics, /Recommended GA4 conversion status/);
 assert.match(analytics, /request_consultation_click/);
 assert.match(analytics, /scroll_75/);
+
+assert.doesNotMatch(app, /bg-obsidian text-champagne"><Icon/);
+assert.doesNotMatch(app, /bg-obsidian text-champagne">\{React\.createElement/);
+assert.doesNotMatch(app, /bg-obsidian text-champagne">\{person\.image/);

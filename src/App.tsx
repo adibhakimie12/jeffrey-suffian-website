@@ -537,7 +537,7 @@ function InsightsPreview() {
           const Icon = insightIcons[index] ?? BookOpenCheck;
           return (
           <article key={title} className="border border-champagne/15 bg-white/70 p-5">
-            <div className="mb-4 flex h-8 w-8 items-center justify-center rounded bg-obsidian text-champagne"><Icon className="h-3.5 w-3.5" /></div>
+            <div className="mb-4 flex h-8 w-8 items-center justify-center rounded border border-champagne/20 bg-champagne/10 text-champagne"><Icon className="h-3.5 w-3.5" /></div>
             <p className="text-[10px] font-bold uppercase tracking-widest text-champagne">{category}</p>
             <h3 className="mt-3 font-serif text-lg text-obsidian">{title}</h3>
             <p className="mt-2 text-xs leading-6 text-charcoal/58">{excerpt}</p>
@@ -562,7 +562,7 @@ function ServiceCards({ limit }: { limit?: number }) {
         {list.map((service, index) => {
           const Icon = serviceIcons[index] ?? FileCheck2;
           return <a key={service.path} href={service.path} className="group border border-gray-100 bg-white p-8 shadow-sm transition hover:border-champagne/40">
-            <div className="mb-7 flex h-10 w-10 items-center justify-center rounded bg-obsidian text-champagne"><Icon className="h-4.5 w-4.5" /></div>
+            <div className="mb-7 flex h-10 w-10 items-center justify-center rounded border border-champagne/20 bg-champagne/10 text-champagne"><Icon className="h-4.5 w-4.5" /></div>
             <h3 className="font-serif text-xl text-obsidian">{service.h1}</h3><p className="mt-4 min-h-20 text-xs leading-6 text-charcoal/62">{service.overview}</p><span className="mt-6 inline-flex items-center text-[11px] font-bold uppercase tracking-wider text-obsidian">Learn More <ArrowRight className="ml-2 h-3.5 w-3.5" /></span>
           </a>;
         })}
@@ -580,7 +580,7 @@ function PeoplePreview() {
 }
 
 function PersonCard({ person }: { person: (typeof people)[number] }) {
-  return <article className="bg-white p-7 shadow-sm"><div className="mx-auto flex h-28 w-28 items-center justify-center overflow-hidden rounded-full bg-obsidian text-xl font-serif text-champagne">{person.image ? <img src={person.image} alt={person.name} loading="lazy" referrerPolicy="no-referrer" className="h-full w-full object-cover grayscale" /> : person.name.split(' ').map((x) => x[0]).join('').slice(0, 2)}</div><h2 className="mt-5 font-serif text-xl text-obsidian">{person.name}</h2><p className="mt-1 text-[11px] font-bold uppercase tracking-widest text-champagne">{person.role}</p><p className="mt-3 text-xs leading-6 text-charcoal/58">{person.credentials}</p><p className="mt-3 text-xs leading-6 text-charcoal/58">{person.bio}</p><a href="/our-people" data-event="partner_profile_view" className="mt-5 inline-flex text-[11px] font-bold uppercase tracking-wider text-obsidian">View Profile</a></article>;
+  return <article className="bg-white p-7 shadow-sm"><div className="mx-auto flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-champagne/20 bg-champagne/10 text-xl font-serif text-obsidian">{person.image ? <img src={person.image} alt={person.name} loading="lazy" referrerPolicy="no-referrer" className="h-full w-full object-cover grayscale" /> : person.name.split(' ').map((x) => x[0]).join('').slice(0, 2)}</div><h2 className="mt-5 font-serif text-xl text-obsidian">{person.name}</h2><p className="mt-1 text-[11px] font-bold uppercase tracking-widest text-champagne">{person.role}</p><p className="mt-3 text-xs leading-6 text-charcoal/58">{person.credentials}</p><p className="mt-3 text-xs leading-6 text-charcoal/58">{person.bio}</p><a href="/our-people" data-event="partner_profile_view" className="mt-5 inline-flex text-[11px] font-bold uppercase tracking-wider text-obsidian">View Profile</a></article>;
 }
 
 function AboutPage({ page }: { page: PageMeta }) {
@@ -588,7 +588,7 @@ function AboutPage({ page }: { page: PageMeta }) {
     ['Direct senior involvement', ShieldCheck],
     ['Clear compliance guidance', FileCheck2],
     ['Concise commercial advice', Landmark]
-  ].map(([item, Icon]) => <div key={item as string} className="border border-gray-100 bg-white p-7"><div className="mb-5 flex h-10 w-10 items-center justify-center rounded bg-obsidian text-champagne">{React.createElement(Icon as typeof ShieldCheck, { className: 'h-4.5 w-4.5' })}</div><h2 className="font-serif text-xl">{item as string}</h2></div>)}</div></Section><Section tone="navy"><CTA dark /></Section></>;
+  ].map(([item, Icon]) => <div key={item as string} className="border border-gray-100 bg-white p-7"><div className="mb-5 flex h-10 w-10 items-center justify-center rounded border border-champagne/20 bg-champagne/10 text-champagne">{React.createElement(Icon as typeof ShieldCheck, { className: 'h-4.5 w-4.5' })}</div><h2 className="font-serif text-xl">{item as string}</h2></div>)}</div></Section><Section tone="navy"><CTA dark /></Section></>;
 }
 
 function ServicesHub({ page }: { page: PageMeta }) {
@@ -616,14 +616,14 @@ function PeoplePage({ page }: { page: PageMeta }) {
 }
 
 function IndustriesPage({ page }: { page: PageMeta }) {
-  return <><PageHero page={page} /><Section tone="white"><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{industries.map(([name, desc, href], index) => { const Icon = industryIcons[index] ?? BriefcaseBusiness; return <a key={name} href={href} className="border border-gray-100 bg-white p-7"><div className="mb-5 flex h-10 w-10 items-center justify-center rounded bg-obsidian text-champagne"><Icon className="h-4.5 w-4.5" /></div><h2 className="font-serif text-xl text-obsidian">{name}</h2><p className="mt-3 text-xs leading-6 text-charcoal/62">{desc}</p><span className="mt-5 inline-flex text-[11px] font-bold uppercase tracking-wider">Relevant Services</span></a>; })}</div></Section></>;
+  return <><PageHero page={page} /><Section tone="white"><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{industries.map(([name, desc, href], index) => { const Icon = industryIcons[index] ?? BriefcaseBusiness; return <a key={name} href={href} className="border border-gray-100 bg-white p-7"><div className="mb-5 flex h-10 w-10 items-center justify-center rounded border border-champagne/20 bg-champagne/10 text-champagne"><Icon className="h-4.5 w-4.5" /></div><h2 className="font-serif text-xl text-obsidian">{name}</h2><p className="mt-3 text-xs leading-6 text-charcoal/62">{desc}</p><span className="mt-5 inline-flex text-[11px] font-bold uppercase tracking-wider">Relevant Services</span></a>; })}</div></Section></>;
 }
 
 function InsightsPage({ page }: { page: PageMeta }) {
   return <><PageHero page={page} /><Section><div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{insights.map(([category, title, excerpt, href], index) => {
     const relatedService = services[index % services.length];
     const Icon = insightIcons[index] ?? BookOpenCheck;
-    return <article key={title} className="border border-champagne/20 bg-white p-7"><div className="mb-5 flex h-10 w-10 items-center justify-center rounded bg-obsidian text-champagne"><Icon className="h-4.5 w-4.5" /></div><p className="text-[11px] font-bold uppercase tracking-widest text-champagne">{category}</p><h2 className="mt-3 font-serif text-xl text-obsidian">{title}</h2><p className="mt-3 text-xs leading-6 text-charcoal/62">{excerpt}</p><div className="mt-5 flex flex-wrap gap-4"><a href={href} data-event="blog_cta_click" className="inline-flex text-[11px] font-bold uppercase tracking-wider">Read More</a><a href={relatedService.path} className="inline-flex text-[11px] font-bold uppercase tracking-wider text-charcoal/55">Related Service</a></div></article>;
+    return <article key={title} className="border border-champagne/20 bg-white p-7"><div className="mb-5 flex h-10 w-10 items-center justify-center rounded border border-champagne/20 bg-champagne/10 text-champagne"><Icon className="h-4.5 w-4.5" /></div><p className="text-[11px] font-bold uppercase tracking-widest text-champagne">{category}</p><h2 className="mt-3 font-serif text-xl text-obsidian">{title}</h2><p className="mt-3 text-xs leading-6 text-charcoal/62">{excerpt}</p><div className="mt-5 flex flex-wrap gap-4"><a href={href} data-event="blog_cta_click" className="inline-flex text-[11px] font-bold uppercase tracking-wider">Read More</a><a href={relatedService.path} className="inline-flex text-[11px] font-bold uppercase tracking-wider text-charcoal/55">Related Service</a></div></article>;
   })}</div></Section></>;
 }
 
@@ -637,7 +637,7 @@ function FormInput({ label, type = 'text' }: { label: string; type?: string }) {
 
 function Info({ title, body, link }: { title: string; body: string; link?: string }) {
   const Icon = contactIcons[title as keyof typeof contactIcons] ?? Mail;
-  return <div className="border border-champagne/20 bg-white p-6"><div className="mb-4 flex h-9 w-9 items-center justify-center rounded bg-obsidian text-champagne"><Icon className="h-4 w-4" /></div><h2 className="text-xs font-bold uppercase tracking-widest text-champagne">{title}</h2>{link ? <a href={link} data-event="phone_click" className="mt-2 block text-sm leading-6 text-charcoal/70">{body}</a> : <p className="mt-2 text-sm leading-6 text-charcoal/70">{body}</p>}</div>;
+  return <div className="border border-champagne/20 bg-white p-6"><div className="mb-4 flex h-9 w-9 items-center justify-center rounded border border-champagne/20 bg-champagne/10 text-champagne"><Icon className="h-4 w-4" /></div><h2 className="text-xs font-bold uppercase tracking-widest text-champagne">{title}</h2>{link ? <a href={link} data-event="phone_click" className="mt-2 block text-sm leading-6 text-charcoal/70">{body}</a> : <p className="mt-2 text-sm leading-6 text-charcoal/70">{body}</p>}</div>;
 }
 
 function LocationPanel() {
