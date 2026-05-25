@@ -73,6 +73,10 @@ for (const term of [
   'insightIcons',
   'industryIcons',
   'contactIcons',
+  'mapsUrl',
+  'wazeUrl',
+  'Open Google Maps',
+  'Open Waze',
   'data-event="service_page_cta_click"'
 ]) {
   assert.match(app, new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));

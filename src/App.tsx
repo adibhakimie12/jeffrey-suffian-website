@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowRight, BookOpenCheck, BriefcaseBusiness, Building2, ChevronDown, CircleDollarSign, Factory, FileCheck2, Landmark, Lightbulb, Mail, MapPin, Menu, Phone, Scale, ShieldCheck, TrendingUp, X } from 'lucide-react';
+import { ArrowRight, BookOpenCheck, BriefcaseBusiness, Building2, ChevronDown, CircleDollarSign, ExternalLink, Factory, FileCheck2, Landmark, Lightbulb, Mail, MapPin, Menu, Phone, Scale, ShieldCheck, TrendingUp, X } from 'lucide-react';
 
 const SITE_URL = 'https://www.jeffreysuffian.com';
 const GTM_ID = 'Google Tag Manager ID';
@@ -45,6 +45,10 @@ const firm = {
   status: 'Approved audit firm and tax agency firm licensed by Ministry of Finance.',
   member: 'Member firm of the Malaysian Institute of Accountants.'
 };
+
+const encodedAddress = encodeURIComponent(firm.address);
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+const wazeUrl = `https://waze.com/ul?q=${encodedAddress}&navigate=yes`;
 
 const nav = [
   ['Home', '/'],
@@ -624,7 +628,7 @@ function InsightsPage({ page }: { page: PageMeta }) {
 }
 
 function ContactPage({ page }: { page: PageMeta }) {
-  return <><PageHero page={page} /><Section><div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr]"><form className="grid gap-4" data-event="contact_form_submit"><FormInput label="Name" /><FormInput label="Company" /><FormInput label="Email" type="email" /><FormInput label="Phone" /><label className="text-sm font-bold text-obsidian">Service Required<select className="mt-2 min-h-11 w-full rounded border border-charcoal/10 bg-white px-4"><option>Statutory Audit & Assurance</option><option>Tax Compliance & Advisory</option><option>Business Advisory</option><option>Corporate Recovery</option></select></label><label className="text-sm font-bold text-obsidian">Message<textarea className="mt-2 min-h-32 w-full rounded border border-charcoal/10 bg-white px-4 py-3" /></label><button type="button" data-event="contact_form_submit" className="min-h-11 rounded bg-champagne px-6 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</button></form><div className="space-y-5"><Info title="Address" body={firm.address} /><Info title="Phone" body={firm.phone} link={firm.phoneHref} /><Info title="Hours" body={firm.hours} /><div className="min-h-48 rounded border border-champagne/20 bg-white p-6 text-sm text-charcoal/55">Map placeholder - Phileo Damansara 1, Petaling Jaya</div><p className="text-xs leading-6 text-charcoal/55">Your enquiry will be handled professionally and confidentially by our team.</p></div></div></Section></>;
+  return <><PageHero page={page} /><Section><div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr]"><form className="grid gap-4" data-event="contact_form_submit"><FormInput label="Name" /><FormInput label="Company" /><FormInput label="Email" type="email" /><FormInput label="Phone" /><label className="text-sm font-bold text-obsidian">Service Required<select className="mt-2 min-h-11 w-full rounded border border-charcoal/10 bg-white px-4"><option>Statutory Audit & Assurance</option><option>Tax Compliance & Advisory</option><option>Business Advisory</option><option>Corporate Recovery</option></select></label><label className="text-sm font-bold text-obsidian">Message<textarea className="mt-2 min-h-32 w-full rounded border border-charcoal/10 bg-white px-4 py-3" /></label><button type="button" data-event="contact_form_submit" className="min-h-11 rounded bg-champagne px-6 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</button></form><div className="space-y-5"><Info title="Address" body={firm.address} /><Info title="Phone" body={firm.phone} link={firm.phoneHref} /><Info title="Hours" body={firm.hours} /><LocationPanel /><p className="text-xs leading-6 text-charcoal/55">Your enquiry will be handled professionally and confidentially by our team.</p></div></div></Section></>;
 }
 
 function FormInput({ label, type = 'text' }: { label: string; type?: string }) {
@@ -634,6 +638,29 @@ function FormInput({ label, type = 'text' }: { label: string; type?: string }) {
 function Info({ title, body, link }: { title: string; body: string; link?: string }) {
   const Icon = contactIcons[title as keyof typeof contactIcons] ?? Mail;
   return <div className="border border-champagne/20 bg-white p-6"><div className="mb-4 flex h-9 w-9 items-center justify-center rounded bg-obsidian text-champagne"><Icon className="h-4 w-4" /></div><h2 className="text-xs font-bold uppercase tracking-widest text-champagne">{title}</h2>{link ? <a href={link} data-event="phone_click" className="mt-2 block text-sm leading-6 text-charcoal/70">{body}</a> : <p className="mt-2 text-sm leading-6 text-charcoal/70">{body}</p>}</div>;
+}
+
+function LocationPanel() {
+  return (
+    <div className="overflow-hidden border border-champagne/20 bg-white">
+      <a href={mapsUrl} target="_blank" rel="noreferrer" aria-label="Open Jeffrey Suffian office location in Google Maps" className="group block min-h-44 bg-[radial-gradient(circle_at_18%_20%,rgba(200,164,93,0.18),transparent_28%),linear-gradient(135deg,#050B14,#07111F_55%,#121826)] p-6 text-ivory">
+        <div className="flex h-full min-h-32 flex-col justify-between">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex h-10 w-10 items-center justify-center rounded bg-champagne/12 text-champagne"><MapPin className="h-4.5 w-4.5" /></div>
+            <ExternalLink className="h-4 w-4 text-ivory/45 transition group-hover:text-champagne" />
+          </div>
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-widest text-champagne">Office Location</p>
+            <p className="mt-2 max-w-sm text-sm leading-6 text-ivory/75">Phileo Damansara 1, Petaling Jaya</p>
+          </div>
+        </div>
+      </a>
+      <div className="grid gap-3 border-t border-champagne/15 p-4 sm:grid-cols-2">
+        <a href={mapsUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center justify-center rounded border border-champagne/30 px-4 text-xs font-bold uppercase tracking-wide text-obsidian">Open Google Maps</a>
+        <a href={wazeUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center justify-center rounded bg-obsidian px-4 text-xs font-bold uppercase tracking-wide text-ivory">Open Waze</a>
+      </div>
+    </div>
+  );
 }
 
 function PrivacyPage({ page }: { page: PageMeta }) {
