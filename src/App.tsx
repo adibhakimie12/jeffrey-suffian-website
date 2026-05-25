@@ -370,25 +370,26 @@ function AppLink({ href, children, className = '', event }: { href: string; chil
 function Header() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-obsidian/95 backdrop-blur">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-charcoal/10 bg-white/95 shadow-sm shadow-charcoal/5 backdrop-blur">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
         <a href="/" className="text-left">
-          <span className="block font-serif text-xl font-semibold leading-none text-ivory">Jeffrey Suffian</span>
-          <span className="mt-1 block text-[10px] font-bold uppercase tracking-widest text-champagne">{firm.descriptor}</span>
+          <span className="block font-serif text-xl font-semibold leading-none text-obsidian">Jeffrey Suffian</span>
+          <span className="mt-1 block text-[10px] font-bold uppercase tracking-widest text-signature-red">{firm.descriptor}</span>
+          <span className="brand-accent-strip mt-2 block h-1 w-16 rounded-full" />
         </a>
         <nav className="hidden items-center gap-7 md:flex">
-          {nav.map(([label, href]) => <a key={href} href={href} className="text-xs font-semibold text-ivory/72 transition hover:text-champagne">{label}</a>)}
+          {nav.map(([label, href]) => <a key={href} href={href} className="text-xs font-semibold text-charcoal/72 transition hover:text-signature-red">{label}</a>)}
         </nav>
-        <AppLink href="/contact" event="request_consultation_click" className="hidden min-h-11 items-center rounded bg-champagne px-5 text-xs font-bold uppercase tracking-wide text-obsidian transition hover:bg-goldline md:inline-flex">Request Consultation</AppLink>
-        <button onClick={() => setOpen(!open)} className="min-h-11 min-w-11 rounded border border-white/10 p-2 text-ivory md:hidden" aria-label="Toggle menu">
+        <AppLink href="/contact" event="request_consultation_click" className="hidden min-h-11 items-center rounded bg-signature-yellow px-5 text-xs font-bold uppercase tracking-wide text-obsidian transition hover:bg-goldline md:inline-flex">Request Consultation</AppLink>
+        <button onClick={() => setOpen(!open)} className="min-h-11 min-w-11 rounded border border-charcoal/10 p-2 text-obsidian md:hidden" aria-label="Toggle menu">
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
       {open && (
-        <div className="border-t border-white/10 bg-obsidian px-5 py-5 md:hidden">
+        <div className="border-t border-charcoal/10 bg-white px-5 py-5 md:hidden">
           <div className="flex flex-col gap-4">
-            {nav.map(([label, href]) => <a key={href} href={href} className="text-sm text-ivory/80">{label}</a>)}
-            <AppLink href="/contact" event="request_consultation_click" className="mt-2 flex min-h-11 items-center justify-center rounded bg-champagne px-5 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</AppLink>
+            {nav.map(([label, href]) => <a key={href} href={href} className="text-sm text-charcoal/80">{label}</a>)}
+            <AppLink href="/contact" event="request_consultation_click" className="mt-2 flex min-h-11 items-center justify-center rounded bg-signature-yellow px-5 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</AppLink>
           </div>
         </div>
       )}
@@ -426,7 +427,7 @@ function TrustBadges({ dark = false }: { dark?: boolean }) {
   return (
     <div className="flex flex-wrap gap-3">
       {trustBadges.map((badge) => (
-        <span key={badge} className={`rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-wide ${dark ? 'border-white/10 bg-white/[0.045] text-ivory/72' : 'border-champagne/20 bg-white text-charcoal/70'}`}>{badge}</span>
+        <span key={badge} className={`rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-wide ${dark ? 'border-charcoal/10 bg-white text-charcoal/70 shadow-sm' : 'border-champagne/20 bg-white text-charcoal/70'}`}>{badge}</span>
       ))}
     </div>
   );
@@ -434,21 +435,22 @@ function TrustBadges({ dark = false }: { dark?: boolean }) {
 
 function Breadcrumbs({ page }: { page: PageMeta }) {
   if (page.path === '/') return null;
-  return <div className="mb-5 text-xs text-ivory/45"><a href="/">Home</a><span className="mx-2">/</span><span>{page.h1}</span></div>;
+  return <div className="mb-5 text-xs text-charcoal/45"><a href="/">Home</a><span className="mx-2">/</span><span>{page.h1}</span></div>;
 }
 
 function PageHero({ page, eyebrow = 'Jeffrey Suffian' }: { page: PageMeta; eyebrow?: string }) {
   return (
-    <section className="bg-obsidian pt-28 text-ivory">
+    <section className="bg-paper pt-28 text-charcoal">
       <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
         <Breadcrumbs page={page} />
-        <p className="text-[11px] font-bold uppercase tracking-widest text-champagne">{eyebrow}</p>
-        <h1 className="mt-4 max-w-4xl font-serif text-4xl font-bold leading-tight sm:text-5xl">{page.h1}</h1>
-        <p className="mt-5 max-w-2xl text-sm leading-7 text-ivory/66">{page.description}</p>
+        <div className="brand-accent-strip mb-7 h-1 w-24 rounded-full" />
+        <p className="text-[11px] font-bold uppercase tracking-widest text-signature-red">{eyebrow}</p>
+        <h1 className="mt-4 max-w-4xl font-serif text-4xl font-bold leading-tight text-obsidian sm:text-5xl">{page.h1}</h1>
+        <p className="mt-5 max-w-2xl text-sm leading-7 text-charcoal/66">{page.description}</p>
         <div className="mt-7"><TrustBadges dark /></div>
         {page.path.startsWith('/services/') && (
           <div className="mt-7">
-            <AppLink href="/contact" event="service_page_cta_click" className="inline-flex min-h-11 items-center rounded bg-champagne px-6 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</AppLink>
+            <AppLink href="/contact" event="service_page_cta_click" className="inline-flex min-h-11 items-center rounded bg-signature-yellow px-6 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</AppLink>
           </div>
         )}
       </div>
@@ -457,7 +459,7 @@ function PageHero({ page, eyebrow = 'Jeffrey Suffian' }: { page: PageMeta; eyebr
 }
 
 function Section({ children, tone = 'ivory', className = '' }: { children: React.ReactNode; tone?: 'ivory' | 'white' | 'navy'; className?: string }) {
-  const bg = tone === 'navy' ? 'bg-navy text-ivory' : tone === 'white' ? 'bg-white text-charcoal' : 'bg-ivory text-charcoal';
+  const bg = tone === 'navy' ? 'bg-charcoal text-ivory' : tone === 'white' ? 'bg-white text-charcoal' : 'bg-ivory text-charcoal';
   return <section className={`${bg} py-16 lg:py-20 ${className}`}><div className="mx-auto max-w-7xl px-5 lg:px-8">{children}</div></section>;
 }
 
@@ -467,7 +469,7 @@ function CTA({ dark = false, label = 'Need an audit, tax or advisory partner?', 
       <h2 className="font-serif text-3xl">{label}</h2>
       <p className={`mt-3 max-w-2xl text-sm leading-7 ${dark ? 'text-ivory/62' : 'text-charcoal/62'}`}>{body}</p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <AppLink href="/contact" event={event} className="flex min-h-11 items-center justify-center rounded bg-champagne px-6 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</AppLink>
+        <AppLink href="/contact" event={event} className="flex min-h-11 items-center justify-center rounded bg-signature-yellow px-6 text-xs font-bold uppercase tracking-wide text-obsidian">Request Consultation</AppLink>
         <a href={firm.phoneHref} data-event="phone_click" className={`flex min-h-11 items-center justify-center rounded border px-6 text-xs font-bold uppercase tracking-wide ${dark ? 'border-white/14 text-ivory' : 'border-charcoal/10 text-charcoal'}`}>{firm.phone}</a>
       </div>
     </div>
@@ -477,37 +479,37 @@ function CTA({ dark = false, label = 'Need an audit, tax or advisory partner?', 
 function HomePage() {
   return (
     <>
-      <section id="home" className="bg-obsidian pt-20 text-ivory">
+      <section id="home" className="bg-paper pt-20 text-charcoal">
         <div className="mx-auto grid min-h-[680px] max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:py-24">
           <div>
-            <div className="mb-7 inline-flex rounded border border-champagne/20 bg-champagne/10 px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-champagne">MIA Member Firm AF001963</div>
-            <h1 className="max-w-2xl font-serif text-5xl font-bold leading-[1.08] text-ivory sm:text-6xl lg:text-[4.35rem]">
-              Partner-Led<span className="block text-champagne">Audit, Tax &amp;</span><span className="block text-champagne">Advisory</span><span className="block">for Malaysian</span><span className="block">Businesses.</span>
+            <div className="brand-accent-strip mb-7 h-1.5 w-28 rounded-full" />
+            <div className="mb-7 inline-flex rounded border border-signature-red/15 bg-white px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-signature-red shadow-sm">MIA Member Firm AF001963</div>
+            <h1 className="max-w-2xl font-serif text-5xl font-bold leading-[1.08] text-obsidian sm:text-6xl lg:text-[4.35rem]">
+              Partner-Led<span className="block text-signature-red">Audit, Tax &amp;</span><span className="block text-champagne">Advisory</span><span className="block">for Malaysian</span><span className="block">Businesses.</span>
             </h1>
-            <p className="mt-6 max-w-xl text-[1.02rem] font-medium leading-8 text-ivory/70">We provide statutory audit, comprehensive tax compliance and strategic advisory to Malaysian businesses demanding clarity and institutional confidence.</p>
+            <p className="mt-6 max-w-xl text-[1.02rem] font-medium leading-8 text-charcoal/70">We provide statutory audit, comprehensive tax compliance and strategic advisory to Malaysian businesses demanding clarity and institutional confidence.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <AppLink href="/contact" event="request_consultation_click" className="flex min-h-11 items-center justify-center rounded bg-champagne px-7 text-xs font-extrabold uppercase tracking-wide text-obsidian">Request Consultation</AppLink>
-              <AppLink href="/services" className="inline-flex min-h-11 items-center justify-center rounded border border-white/14 px-7 text-xs font-extrabold uppercase tracking-wide text-ivory hover:border-champagne/60">Explore Services <ArrowRight className="ml-2 h-4 w-4" /></AppLink>
+              <AppLink href="/contact" event="request_consultation_click" className="flex min-h-11 items-center justify-center rounded bg-signature-yellow px-7 text-xs font-extrabold uppercase tracking-wide text-obsidian shadow-lg shadow-signature-yellow/20">Request Consultation</AppLink>
+              <AppLink href="/services" className="inline-flex min-h-11 items-center justify-center rounded border border-charcoal/14 bg-white px-7 text-xs font-extrabold uppercase tracking-wide text-charcoal hover:border-signature-red/40">Explore Services <ArrowRight className="ml-2 h-4 w-4" /></AppLink>
             </div>
           </div>
           <div className="relative hidden min-h-[420px] lg:block">
-            <div className="absolute inset-0 overflow-hidden rounded-lg border border-white/5 bg-black shadow-2xl">
-              <img src="/assets/mario-gogh-office.jpg" alt="Modern office meeting room" className="h-full w-full object-cover opacity-55 grayscale" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_38%_48%,rgba(255,255,255,0.12),rgba(5,11,20,0.42)_38%,rgba(0,0,0,0.78))]" />
-              <div className="absolute inset-0 bg-gradient-to-r from-obsidian/40 via-transparent to-obsidian/55" />
+            <div className="absolute inset-0 overflow-hidden rounded-lg border border-charcoal/10 bg-white shadow-2xl shadow-charcoal/10">
+              <img src="/assets/mario-gogh-office.jpg" alt="Modern office meeting room" className="h-full w-full object-cover opacity-86" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_42%,rgba(242,183,5,0.22),transparent_32%),linear-gradient(90deg,rgba(250,247,240,0.88),rgba(250,247,240,0.18)_50%,rgba(43,43,43,0.34))]" />
             </div>
-            <button id="hero-widget-audit" className="animate-float-subtle absolute left-[-18px] top-28 w-52 rounded-md border border-white/12 bg-white/[0.075] p-4 text-left shadow-xl shadow-black/20 backdrop-blur-md">
-              <p className="text-sm font-bold text-ivory">Statutory Audit</p><p className="mt-1 text-xs font-medium leading-5 text-ivory/58">Rigorous compliance &amp; assurance.</p>
+            <button id="hero-widget-audit" className="animate-float-subtle absolute left-[-18px] top-28 w-52 rounded-md border border-signature-red/15 bg-white/86 p-4 text-left shadow-xl shadow-charcoal/10 backdrop-blur-md">
+              <p className="text-sm font-bold text-obsidian">Statutory Audit</p><p className="mt-1 text-xs font-medium leading-5 text-charcoal/58">Rigorous compliance &amp; assurance.</p>
             </button>
-            <button id="hero-widget-tax" className="animate-float-subtle-slow absolute right-[-12px] top-60 w-52 rounded-md border border-white/12 bg-white/[0.075] p-4 text-left shadow-xl shadow-black/20 backdrop-blur-md">
-              <p className="text-sm font-bold text-ivory">Tax Advisory</p><p className="mt-1 text-xs font-medium leading-5 text-ivory/58">Strategic tax planning &amp; compliance.</p>
+            <button id="hero-widget-tax" className="animate-float-subtle-slow absolute right-[-12px] top-60 w-52 rounded-md border border-champagne/30 bg-white/86 p-4 text-left shadow-xl shadow-charcoal/10 backdrop-blur-md">
+              <p className="text-sm font-bold text-obsidian">Tax Advisory</p><p className="mt-1 text-xs font-medium leading-5 text-charcoal/58">Strategic tax planning &amp; compliance.</p>
             </button>
           </div>
         </div>
-        <div id="trust-marquee" className="relative overflow-hidden border-y border-white/8 bg-navy py-5">
+        <div id="trust-marquee" className="relative overflow-hidden border-y border-charcoal/10 bg-white py-5">
           <div className="animate-trust-marquee flex w-max gap-4 px-4">
             {[...trustBadges, 'Approved Audit Firm', 'Tax Agency Firm', ...trustBadges, 'Approved Audit Firm', 'Tax Agency Firm'].map((item, index) => (
-              <span key={`${item}-${index}`} className="flex min-w-max items-center gap-3 rounded-full border border-white/10 bg-white/[0.045] px-5 py-3 text-[11px] font-extrabold uppercase tracking-wide text-ivory/72"><span className="h-2 w-2 rounded-full bg-champagne" />{item}</span>
+              <span key={`${item}-${index}`} className="flex min-w-max items-center gap-3 rounded-full border border-charcoal/10 bg-paper px-5 py-3 text-[11px] font-extrabold uppercase tracking-wide text-charcoal/72"><span className="h-2 w-2 rounded-full bg-signature-red" />{item}</span>
             ))}
           </div>
         </div>
