@@ -77,6 +77,11 @@ for (const term of [
   'wazeUrl',
   'Open Google Maps',
   'Open Waze',
+  'overflow-x-hidden',
+  'pb-24',
+  'md:pb-0',
+  'env(safe-area-inset-bottom)',
+  'text-[2.75rem]',
   'data-event="service_page_cta_click"'
 ]) {
   assert.match(app, new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));

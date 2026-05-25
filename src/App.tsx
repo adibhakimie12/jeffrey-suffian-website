@@ -484,7 +484,7 @@ function HomePage() {
           <div>
             <div className="brand-accent-strip mb-7 h-1.5 w-28 rounded-full" />
             <div className="mb-7 inline-flex rounded border border-signature-red/15 bg-white px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-signature-red shadow-sm">MIA Member Firm AF001963</div>
-            <h1 className="max-w-2xl font-serif text-5xl font-bold leading-[1.08] text-obsidian sm:text-6xl lg:text-[4.35rem]">
+            <h1 className="max-w-2xl font-serif text-[2.75rem] font-bold leading-[1.08] text-obsidian sm:text-6xl lg:text-[4.35rem]">
               Partner-Led<span className="block text-signature-red">Audit, Tax &amp;</span><span className="block text-champagne">Advisory</span><span className="block">for Malaysian</span><span className="block">Businesses.</span>
             </h1>
             <p className="mt-6 max-w-xl text-[1.02rem] font-medium leading-8 text-charcoal/70">We provide statutory audit, comprehensive tax compliance and strategic advisory to Malaysian businesses demanding clarity and institutional confidence.</p>
@@ -688,7 +688,7 @@ function App() {
   useRouteMeta(page, schema);
 
   return (
-    <div className="min-h-screen bg-ivory font-sans text-charcoal antialiased selection:bg-champagne/30 selection:text-obsidian">
+    <div className="min-h-screen overflow-x-hidden bg-ivory pb-24 font-sans text-charcoal antialiased selection:bg-champagne/30 selection:text-obsidian md:pb-0">
       <Header />
       <main>
         {path === '/' && <HomePage />}
@@ -703,7 +703,7 @@ function App() {
         {!service && !basePages[path] && <NotFoundPage />}
       </main>
       <Footer />
-      <a href="/contact" data-event="request_consultation_click" className="fixed inset-x-4 bottom-4 z-40 flex min-h-11 items-center justify-center rounded bg-champagne text-xs font-bold uppercase tracking-wide text-obsidian shadow-xl md:hidden">Request Consultation</a>
+      <a href="/contact" data-event="request_consultation_click" className="fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex min-h-12 items-center justify-center rounded bg-signature-yellow text-xs font-bold uppercase tracking-wide text-obsidian shadow-xl shadow-signature-yellow/25 md:hidden">Request Consultation</a>
     </div>
   );
 }
