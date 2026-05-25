@@ -24,3 +24,5 @@ assert.match(css, /--color-signature-yellow:\s*#F2B705/i);
 assert.match(css, /--color-signature-red:\s*#B51E23/i);
 assert.match(app, /brand-accent-strip/);
 assert.match(app, /bg-paper/);
+assert.match(app, /frosted-widget/);
+assert.match(app, /backdrop-blur-xl/);

@@ -498,10 +498,10 @@ function HomePage() {
               <img src="/assets/mario-gogh-office.jpg" alt="Modern office meeting room" className="h-full w-full object-cover opacity-86" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_42%,rgba(242,183,5,0.22),transparent_32%),linear-gradient(90deg,rgba(250,247,240,0.88),rgba(250,247,240,0.18)_50%,rgba(43,43,43,0.34))]" />
             </div>
-            <button id="hero-widget-audit" className="animate-float-subtle absolute left-[-18px] top-28 w-52 rounded-md border border-signature-red/15 bg-white/86 p-4 text-left shadow-xl shadow-charcoal/10 backdrop-blur-md">
+            <button id="hero-widget-audit" className="frosted-widget animate-float-subtle absolute left-[-18px] top-28 w-56 rounded-lg border border-white/70 bg-white/58 p-5 text-left shadow-2xl shadow-signature-yellow/18 backdrop-blur-xl ring-1 ring-signature-yellow/20">
               <p className="text-sm font-bold text-obsidian">Statutory Audit</p><p className="mt-1 text-xs font-medium leading-5 text-charcoal/58">Rigorous compliance &amp; assurance.</p>
             </button>
-            <button id="hero-widget-tax" className="animate-float-subtle-slow absolute right-[-12px] top-60 w-52 rounded-md border border-champagne/30 bg-white/86 p-4 text-left shadow-xl shadow-charcoal/10 backdrop-blur-md">
+            <button id="hero-widget-tax" className="frosted-widget animate-float-subtle-slow absolute right-[-12px] top-60 w-56 rounded-lg border border-white/70 bg-white/58 p-5 text-left shadow-2xl shadow-signature-red/12 backdrop-blur-xl ring-1 ring-champagne/25">
               <p className="text-sm font-bold text-obsidian">Tax Advisory</p><p className="mt-1 text-xs font-medium leading-5 text-charcoal/58">Strategic tax planning &amp; compliance.</p>
             </button>
           </div>
