@@ -14,16 +14,20 @@ for (const viewport of viewports) {
     const initial = await page.evaluate(() => {
       const doc = document.documentElement;
       const cta = document.querySelector('a[data-event="request_consultation_click"].fixed');
+      const visual = document.querySelector('.mobile-hero-visual');
       const rect = cta?.getBoundingClientRect();
+      const visualRect = visual?.getBoundingClientRect();
 
       return {
         hasHorizontalOverflow: doc.scrollWidth > doc.clientWidth + 1,
         stickyExists: !!cta,
-        stickyWidth: rect?.width ?? 0
+        stickyWidth: rect?.width ?? 0,
+        heroVisualVisible: !!visualRect && visualRect.height > 220 && visualRect.top < window.innerHeight
       };
     });
 
     expect(initial.hasHorizontalOverflow).toBe(false);
+    expect(initial.heroVisualVisible).toBe(true);
     if (viewport.width < 768) {
       expect(initial.stickyExists).toBe(false);
     }

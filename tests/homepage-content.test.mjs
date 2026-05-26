@@ -26,3 +26,5 @@ assert.match(app, /brand-accent-strip/);
 assert.match(app, /bg-paper/);
 assert.match(app, /frosted-widget/);
 assert.match(app, /backdrop-blur-xl/);
+assert.match(app, /mobile-hero-visual/);
+assert.doesNotMatch(app, /hidden min-h-\[420px\] lg:block/);
