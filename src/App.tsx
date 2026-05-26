@@ -676,10 +676,17 @@ function NotFoundPage() {
 
 function App() {
   const [path, setPath] = useState(currentPath());
+  const [showMobileCta, setShowMobileCta] = useState(false);
   useEffect(() => {
     const onPop = () => setPath(currentPath());
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
+  }, []);
+  useEffect(() => {
+    const onScroll = () => setShowMobileCta(window.scrollY > 520);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const service = services.find((item) => item.path === path);
@@ -703,7 +710,7 @@ function App() {
         {!service && !basePages[path] && <NotFoundPage />}
       </main>
       <Footer />
-      <a href="/contact" data-event="request_consultation_click" className="fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex min-h-12 items-center justify-center rounded bg-signature-yellow text-xs font-bold uppercase tracking-wide text-obsidian shadow-xl shadow-signature-yellow/25 md:hidden">Request Consultation</a>
+      {showMobileCta && <a href="/contact" aria-label="Request consultation" data-event="request_consultation_click" className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-signature-yellow px-4 text-xs font-bold uppercase tracking-wide text-obsidian shadow-xl shadow-signature-yellow/25 md:hidden"><Phone className="h-4 w-4" />Consult</a>}
     </div>
   );
 }

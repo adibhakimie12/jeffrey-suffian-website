@@ -11,22 +11,43 @@ for (const viewport of viewports) {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
 
-    const data = await page.evaluate(() => {
+    const initial = await page.evaluate(() => {
       const doc = document.documentElement;
       const cta = document.querySelector('a[data-event="request_consultation_click"].fixed');
       const rect = cta?.getBoundingClientRect();
 
       return {
         hasHorizontalOverflow: doc.scrollWidth > doc.clientWidth + 1,
-        stickyVisible: !!rect && rect.bottom <= window.innerHeight && rect.top >= 0 && getComputedStyle(cta).display !== 'none',
-        stickyHeight: rect?.height ?? 0
+        stickyExists: !!cta,
+        stickyWidth: rect?.width ?? 0
       };
     });
 
-    expect(data.hasHorizontalOverflow).toBe(false);
+    expect(initial.hasHorizontalOverflow).toBe(false);
     if (viewport.width < 768) {
-      expect(data.stickyVisible).toBe(true);
-      expect(data.stickyHeight).toBeGreaterThanOrEqual(44);
+      expect(initial.stickyExists).toBe(false);
+    }
+
+    await page.mouse.wheel(0, 720);
+    await page.waitForTimeout(150);
+
+    const afterScroll = await page.evaluate(() => {
+      const cta = document.querySelector('a[data-event="request_consultation_click"].fixed');
+      const rect = cta?.getBoundingClientRect();
+
+      return {
+        stickyVisible: !!rect && rect.bottom <= window.innerHeight && rect.top >= 0 && getComputedStyle(cta).display !== 'none',
+        stickyHeight: rect?.height ?? 0,
+        stickyWidth: rect?.width ?? 0,
+        stickyText: cta?.textContent?.trim() ?? ''
+      };
+    });
+
+    if (viewport.width < 768) {
+      expect(afterScroll.stickyVisible).toBe(true);
+      expect(afterScroll.stickyHeight).toBeGreaterThanOrEqual(44);
+      expect(afterScroll.stickyWidth).toBeLessThan(190);
+      expect(afterScroll.stickyText).toBe('Consult');
     }
   });
 }
