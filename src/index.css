@@ -1,5 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Libre Baskerville";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/libre-baskerville-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Libre Baskerville";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/libre-baskerville-latin-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/fonts/manrope-latin.woff2") format("woff2");
+}
 
 @theme {
   --color-obsidian: #111111;
@@ -64,4 +85,87 @@
 
 @utility animate-trust-marquee {
   animation: trust-marquee 34s linear infinite;
+}
+
+html { scroll-padding-top: 6rem; }
+/* Decorative CSS surfaces: no image requests, scripts or continuous animation. */
+.firm-backdrop,
+.firm-light-grid,
+.firm-section-dots,
+.firm-grid-backdrop {
+  position: relative;
+  isolation: isolate;
+}
+.firm-backdrop {
+  background-image: radial-gradient(ellipse at 95% 18%, rgba(242,183,5,.12), transparent 52%);
+}
+.firm-backdrop::before,
+.firm-light-grid::before,
+.firm-section-dots::before,
+.firm-grid-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.firm-backdrop::before {
+  background-image: radial-gradient(rgba(43,43,43,.26) 1.1px, transparent 1.1px);
+  background-size: 18px 18px;
+  -webkit-mask-image: linear-gradient(105deg, rgba(0,0,0,.28), rgba(0,0,0,.48) 45%, #000 100%);
+  mask-image: linear-gradient(105deg, rgba(0,0,0,.28), rgba(0,0,0,.48) 45%, #000 100%);
+}
+.firm-backdrop-home {
+  background-image: radial-gradient(ellipse at 96% 24%, rgba(242,183,5,.18), transparent 55%);
+}
+.firm-light-grid::before {
+  background-image: linear-gradient(rgba(43,43,43,.075) 1px, transparent 1px), linear-gradient(90deg, rgba(43,43,43,.075) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: linear-gradient(105deg, rgba(0,0,0,.35), rgba(0,0,0,.55) 45%, #000 100%);
+  mask-image: linear-gradient(105deg, rgba(0,0,0,.35), rgba(0,0,0,.55) 45%, #000 100%);
+}
+.firm-section-dots::before {
+  background-image: radial-gradient(rgba(181,30,35,.14) 1px, transparent 1px);
+  background-size: 20px 20px;
+  -webkit-mask-image: linear-gradient(90deg, #000, rgba(0,0,0,.28) 35%, rgba(0,0,0,.28) 65%, #000);
+  mask-image: linear-gradient(90deg, #000, rgba(0,0,0,.28) 35%, rgba(0,0,0,.28) 65%, #000);
+}
+.firm-grid-backdrop::before {
+  background-image: linear-gradient(rgba(255,211,77,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(255,211,77,.09) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: linear-gradient(110deg, transparent 20%, #000 100%);
+  mask-image: linear-gradient(110deg, transparent 20%, #000 100%);
+}
+@media (max-width: 639px) {
+  .firm-backdrop::before, .firm-light-grid::before, .firm-section-dots::before { opacity: .8; }
+  .firm-grid-backdrop::before { opacity: .6; }
+}
+.nav-pill-link[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: #B51E23;
+}
+@keyframes hero-cursor { 0%, 45% { opacity: 1; } 46%, 100% { opacity: 0; } }
+.hero-typing-cursor { animation: hero-cursor 1s steps(1) infinite; }
+:focus-visible { outline: 3px solid #B51E23; outline-offset: 4px; }
+.enquiry-control { -webkit-text-size-adjust: 100%; }
+.enquiry-control::placeholder { color: #737373; opacity: 1; }
+.enquiry-control:focus { border-color: #B51E23; background-color: white; box-shadow: 0 0 0 3px rgba(181,30,35,0.08); }
+.service-motion .service-card { transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease; }
+.service-card-image { transition: transform 350ms ease; }
+.team-portrait-image { transition: transform 350ms ease; }
+.team-portrait-link { transition: transform 220ms ease; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .team-portrait-link:hover { transform: translateY(-6px); }
+  .team-profile:hover .team-portrait-image { transform: scale(1.025); }
+  .service-motion .service-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(17,17,17,0.07); }
+  .service-card:hover .service-card-image { transform: scale(1.035); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; }
 }

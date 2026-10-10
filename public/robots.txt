@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.jeffreysuffian.com/sitemap.xml
+Sitemap: https://jeffreysuffian.com/sitemap.xml

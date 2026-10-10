@@ -1,8 +1,29 @@
 {
-  "rewrites": [
-    {
-      "source": "/((?!sitemap.xml|robots.txt|assets/.*).*)",
-      "destination": "/index.html"
-    }
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.jeffreysuffian.com" }], "destination": "https://jeffreysuffian.com/:path*", "permanent": true },
+    { "source": "/about-us", "destination": "/about", "permanent": true },
+    { "source": "/our-services", "destination": "/services", "permanent": true },
+    { "source": "/contact-us", "destination": "/contact", "permanent": true },
+    { "source": "/jeffrey-bosra", "destination": "/our-people#jeffrey-bosra", "permanent": true },
+    { "source": "/eddy-suffian", "destination": "/our-people#eddy-suffian", "permanent": true },
+    { "source": "/kamarul-baharin", "destination": "/our-people#kamarul-baharin", "permanent": true },
+    { "source": "/nurul-elmi", "destination": "/our-people#nurul-elmi", "permanent": true },
+    { "source": "/noor-ain", "destination": "/our-people#noor-ain", "permanent": true }
+  ],
+  "headers": [
+    { "source": "/", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+    ] },
+    { "source": "/", "has": [{ "type": "host", "value": "(?<preview>.*\\.vercel\\.app)" }], "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/:path*", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+    ] },
+    { "source": "/:path*", "has": [{ "type": "host", "value": "(?<preview>.*\\.vercel\\.app)" }], "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
   ]
 }
