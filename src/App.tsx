@@ -9,6 +9,8 @@ import { insightGuides, insightsCheckedDate } from './content/insights';
 import { InsightsHub, InsightArticlePage } from './components/InsightsPages';
 import { TeamShowcase } from './components/TeamShowcase';
 import { HeroSlideshow } from './components/HeroSlideshow';
+import { FloatingContact } from './components/FloatingContact';
+import { WhatsAppIcon } from './components/WhatsAppIcon';
 
 
 type Service = PageMeta & {
@@ -28,12 +30,14 @@ const firm = {
   phoneInternational: '+603-7660 3915/3917',
   phoneHref: 'tel:+60376603915',
   email: 'info@jeffreysuffian.com',
+  whatsApp: '017-632 9754',
   hours: 'Monday to Friday, 9:00am - 5:00pm',
   address: 'Unit 805, Blok E, Phileo Damansara 1, Jalan 16/11, 46350 Petaling Jaya, Selangor, Malaysia',
   status: 'Approved audit firm and tax agency firm licensed by Ministry of Finance.',
   member: 'Member firm of the Malaysian Institute of Accountants.'
 };
 
+const whatsAppUrl = `https://wa.me/60176329754?text=${encodeURIComponent('Hi Jeffrey Suffian, I would like to enquire about your services.')}`;
 const encodedAddress = encodeURIComponent(firm.address);
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
 const wazeUrl = `https://waze.com/ul?q=${encodedAddress}&navigate=yes`;
@@ -426,7 +430,7 @@ function Header({ path }: { path: string }) {
 
 function Footer() {
   return (
-    <footer className="bg-obsidian py-12 text-ivory">
+    <footer className="bg-obsidian pb-20 pt-12 text-ivory">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-[1.2fr_0.8fr_0.8fr] lg:px-8">
         <div>
           <img src="/assets/jeffrey-suffian-logo.png" alt="Jeffrey Suffian Chartered Accountants" width="749" height="128" loading="lazy" className="mb-5 h-auto w-full max-w-[310px] rounded-lg bg-white p-4" />
@@ -442,6 +446,7 @@ function Footer() {
             <p>{firm.address}</p>
             <p><a href={firm.phoneHref} data-event="phone_click">{firm.phone}</a></p>
             <p><a href={`mailto:${firm.email}`} data-event="email_click" className="break-words hover:underline">{firm.email}</a></p>
+            <p><a href={whatsAppUrl} target="_blank" rel="noopener noreferrer" data-event="whatsapp_click" className="inline-flex items-center gap-2 hover:underline"><WhatsAppIcon className="h-4 w-4 text-[#25D366]" />WhatsApp: {firm.whatsApp}</a></p>
             <p>{firm.hours}</p>
             <p><a href="/privacy-policy">Privacy Policy</a></p>
           </div>
@@ -699,6 +704,7 @@ function ContactPage({ page }: { page: PageMeta }) {
             <div className="mt-5 flex items-start gap-3"><BookOpenCheck aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div><h3 className="text-sm font-semibold">Office hours</h3><p className="mt-2 text-sm leading-7 text-charcoal/85">{firm.hours}<br />Saturday &amp; Sunday: closed</p></div></div>
             <div className="mt-5 flex items-start gap-3"><Phone aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div><h3 className="text-sm font-semibold">Prefer a conversation?</h3><div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm font-semibold"><a href={firm.phoneHref} data-event="phone_click" className="inline-flex min-h-11 items-center underline underline-offset-4">03-7660 3915</a><span aria-hidden="true">/</span><a href="tel:+60376603917" data-event="phone_click" className="inline-flex min-h-11 items-center underline underline-offset-4">03-7660 3917</a></div></div></div>
             <div className="mt-4 flex items-start gap-3"><Mail aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div className="min-w-0"><h3 className="text-sm font-semibold">Email our office</h3><a href={`mailto:${firm.email}`} data-event="email_click" className="mt-1 inline-flex min-h-11 max-w-full items-center break-all text-sm font-semibold underline underline-offset-4">{firm.email}</a></div></div>
+            <div className="mt-4 flex items-start gap-3"><WhatsAppIcon className="mt-1 h-5 w-5 shrink-0 text-[#167d4d]" /><div><h3 className="text-sm font-semibold">WhatsApp our team</h3><a href={whatsAppUrl} target="_blank" rel="noopener noreferrer" data-event="whatsapp_click" className="mt-1 inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline underline-offset-4">{firm.whatsApp}<ArrowRight aria-hidden="true" className="h-3.5 w-3.5" /></a></div></div>
           </div>
         </div>
         <LocationPanel />
@@ -786,7 +792,7 @@ function App({ initialPath }: { initialPath?: string }) {
       </main>
       <Footer />
       <AnalyticsConsent />
-      {showMobileCta && path !== '/contact' && <a href="/contact" aria-label="Request consultation" data-event="request_consultation_click" className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-signature-yellow px-4 text-xs font-bold uppercase tracking-wide text-obsidian shadow-xl shadow-signature-yellow/25 md:hidden"><Phone className="h-4 w-4" />Consult</a>}
+      <FloatingContact href={whatsAppUrl} number={firm.whatsApp} showConsult={showMobileCta && path !== '/contact'} />
     </div>
   );
 }

@@ -13,7 +13,7 @@ for (const viewport of viewports) {
 
     const initial = await page.evaluate(() => {
       const doc = document.documentElement;
-      const cta = document.querySelector('a[data-event="request_consultation_click"].fixed');
+      const cta = document.querySelector('[aria-label="Quick contact"] a[aria-label="Request consultation"]');
       const visual = document.querySelector('.mobile-hero-visual');
       const rect = cta?.getBoundingClientRect();
       const visualRect = visual?.getBoundingClientRect();
@@ -36,7 +36,7 @@ for (const viewport of viewports) {
     await page.waitForTimeout(150);
 
     const afterScroll = await page.evaluate(() => {
-      const cta = document.querySelector('a[data-event="request_consultation_click"].fixed');
+      const cta = document.querySelector('[aria-label="Quick contact"] a[aria-label="Request consultation"]');
       const rect = cta?.getBoundingClientRect();
 
       return {

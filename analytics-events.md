@@ -23,7 +23,8 @@ No Google measurement scripts are loaded until the visitor accepts measurement c
 | phone_click | Telephone link click | Secondary; a click does not prove a completed call |
 | partner_profile_view | Profile anchor click | Navigation signal |
 | blog_cta_click | Topic / related-service link click | Navigation signal |
-| email_click | Only if an email link with this data-event is added | Secondary intent signal |
+| email_click | Email link click | Secondary intent signal |
+| whatsapp_click | WhatsApp link click | Secondary intent signal; opening a chat is not a delivered message or accepted lead |
 
 No contact_form_submit conversion is fired on a button click. scroll_75 is not currently implemented. Enhanced measurement form events, if enabled separately in GA4, must not be imported as accepted leads by mistake.
 

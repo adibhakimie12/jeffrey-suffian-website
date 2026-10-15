@@ -55,7 +55,7 @@ export function trackEvent(event: string, params: Record<string, string | number
   }
 }
 
-const clickEvents = new Set(['request_consultation_click', 'phone_click', 'service_page_cta_click', 'partner_profile_view', 'blog_cta_click', 'email_click']);
+const clickEvents = new Set(['request_consultation_click', 'phone_click', 'service_page_cta_click', 'partner_profile_view', 'blog_cta_click', 'email_click', 'whatsapp_click']);
 
 export function AnalyticsConsent() {
   const [open, setOpen] = useState(false);

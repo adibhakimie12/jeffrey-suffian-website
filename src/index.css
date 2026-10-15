@@ -255,3 +255,28 @@ html { scroll-padding-top: 6rem; }
 
 /* Solid brand red stays legible inside SVG-clipped panels across browsers. */
 .hero-copy .hero-typing-word { color: #B51E23; background-image: none; -webkit-text-fill-color: currentColor; }
+
+/* One quiet contact dock; mobile consultation and WhatsApp share a single row. */
+.contact-dock { position: fixed; z-index: 40; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 8px; }
+.whatsapp-float { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; gap: 10px; flex-shrink: 0; border: 2px solid rgba(255,255,255,.95); border-radius: 999px; background: #167d4d; color: #fff; box-shadow: 0 8px 24px -8px rgba(14,92,54,.45); transition: background-color 180ms ease, box-shadow 180ms ease; }
+.whatsapp-float:hover { background: #10683e; box-shadow: 0 10px 28px -8px rgba(14,92,54,.5); }
+@media (min-width: 768px) { .contact-dock { right: 24px; bottom: 24px; } }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) { .whatsapp-float { transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease; } .whatsapp-float:hover { transform: translateY(-2px); } }
+
+.contact-dock[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) { .whatsapp-float { transition: none; } }
+
+/* Quiet breathing motion; keyboard focus follows WhatsApp's green identity. */
+.whatsapp-float:focus-visible { outline: 2px solid #167d4d; outline-offset: 3px; }
+
+/* A visible, soft green glow draws attention without enlarging the contact button. */
+@keyframes whatsapp-glow {
+  0%, 100% { box-shadow: 0 5px 16px -5px rgba(14,92,54,.35), 0 0 0 0 rgba(37,211,102,0); }
+  50% { box-shadow: 0 6px 20px -4px rgba(14,92,54,.45), 0 0 0 5px rgba(37,211,102,.14), 0 0 22px 5px rgba(37,211,102,.32); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .whatsapp-float { animation: whatsapp-glow 2.8s ease-in-out infinite; }
+  .whatsapp-float > svg { animation: none; }
+  .whatsapp-float:hover, .whatsapp-float:focus-visible { animation-play-state: paused; }
+}
