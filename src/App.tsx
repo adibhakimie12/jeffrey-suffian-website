@@ -540,9 +540,14 @@ function HomePage() {
         </nav>
         </div>
         <div id="trust-marquee" className="relative overflow-hidden border-y border-charcoal/10 bg-white py-5">
-          <div className="animate-trust-marquee flex w-max gap-4 px-4">
-            {[...trustBadges, 'Approved Audit Firm', 'Tax Agency Firm', ...trustBadges, 'Approved Audit Firm', 'Tax Agency Firm'].map((item, index) => (
-              <span key={`${item}-${index}`} className="flex min-w-max items-center gap-3 rounded-full border border-charcoal/10 bg-paper px-5 py-3 text-[11px] font-extrabold uppercase tracking-wide text-charcoal/72"><span className="h-2 w-2 rounded-full bg-signature-red" />{item}</span>
+          <div className="animate-trust-marquee trust-track">
+            {[0, 1].map((copy) => (
+              <div key={copy} className="trust-group" aria-hidden={copy === 1 ? true : undefined}>
+                {[...trustBadges, 'Approved Audit Firm', 'Tax Agency Firm', ...trustBadges, 'Approved Audit Firm', 'Tax Agency Firm'].map((item, index) => {
+                  const Icon = item === 'AF001963' ? FileCheck2 : item === 'MIA Member Firm' ? UsersRound : item === 'Ministry of Finance Licensed' ? Landmark : item === 'Petaling Jaya, Selangor' ? MapPin : item === 'Approved Audit Firm' ? ShieldCheck : CircleDollarSign;
+                  return <span key={`${item}-${index}`} aria-hidden={index >= 6 ? true : undefined} className="flex shrink-0 items-center gap-3 whitespace-nowrap rounded-full border border-charcoal/10 bg-paper px-5 py-3 text-[11px] font-extrabold uppercase tracking-wide text-charcoal/72"><Icon aria-hidden="true" className="h-4 w-4 shrink-0 text-signature-red" />{item}</span>;
+                })}
+              </div>
             ))}
           </div>
         </div>

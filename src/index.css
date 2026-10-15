@@ -84,7 +84,7 @@
 }
 
 @utility animate-trust-marquee {
-  animation: trust-marquee 34s linear infinite;
+  animation: trust-marquee 68s linear infinite;
 }
 
 html { scroll-padding-top: 6rem; }
@@ -280,3 +280,7 @@ html { scroll-padding-top: 6rem; }
   .whatsapp-float > svg { animation: none; }
   .whatsapp-float:hover, .whatsapp-float:focus-visible { animation-play-state: paused; }
 }
+
+/* Equal complete groups make the halfway reset seamless on wide screens. */
+.trust-track { display: flex; width: max-content; }
+.trust-group { display: flex; flex: none; width: max-content; min-width: 100vw; align-items: center; justify-content: space-around; gap: 16px; padding-right: 16px; }
