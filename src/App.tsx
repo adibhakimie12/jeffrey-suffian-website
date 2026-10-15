@@ -8,6 +8,7 @@ import { ServiceMotion } from './components/ServiceMotion';
 import { insightGuides, insightsCheckedDate } from './content/insights';
 import { InsightsHub, InsightArticlePage } from './components/InsightsPages';
 import { TeamShowcase } from './components/TeamShowcase';
+import { HeroSlideshow } from './components/HeroSlideshow';
 
 
 type Service = PageMeta & {
@@ -397,9 +398,7 @@ function Header({ path }: { path: string }) {
     <><a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded focus:bg-white focus:p-4">Skip to content</a><header className="fixed inset-x-0 top-4 z-50 px-3 sm:px-5 lg:px-8">
       <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-4 rounded-full border border-charcoal/5 bg-white/95 px-5 py-3 shadow-[0_8px_30px_rgba(17,17,17,0.10)] backdrop-blur-xl xl:px-7 xl:py-2">
         <a href="/" className="shrink-0 text-left">
-          <span className="block font-serif text-lg font-semibold leading-none text-obsidian sm:text-xl">Jeffrey Suffian</span>
-          <span className="mt-1 block text-[9px] font-bold uppercase tracking-widest text-signature-red sm:text-[10px]">{firm.descriptor}</span>
-          <span aria-hidden="true" className="brand-accent-strip mt-2 block h-1 w-16 rounded-full" />
+          <img src="/assets/jeffrey-suffian-logo.png" alt="Jeffrey Suffian Chartered Accountants, AF1963" width="749" height="128" className="h-auto w-[160px] min-[360px]:w-[190px] sm:w-[230px] xl:w-[250px]" />
         </a>
         <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex">
           {nav.map(([label, href]) => <a key={href} href={href} aria-current={isActive(href) ? 'page' : undefined} className={`nav-pill-link relative flex min-h-14 items-center px-3 text-xs font-semibold transition-colors hover:text-signature-red ${isActive(href) ? 'text-signature-red' : 'text-charcoal/75'}`}>{label}</a>)}
@@ -426,7 +425,7 @@ function Footer() {
     <footer className="bg-obsidian py-12 text-ivory">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-[1.2fr_0.8fr_0.8fr] lg:px-8">
         <div>
-          <img src="/assets/jeffrey-suffian-logo.png" alt="Jeffrey Suffian Chartered Accountants" width="200" height="50" loading="lazy" className="mb-5 h-12 w-auto rounded bg-white px-3 py-2" />
+          <img src="/assets/jeffrey-suffian-logo.png" alt="Jeffrey Suffian Chartered Accountants" width="749" height="128" loading="lazy" className="mb-5 h-auto w-full max-w-[310px] rounded-lg bg-white p-4" />
           <p className="max-w-sm text-xs leading-6 text-ivory/50">Partner-led audit, tax and advisory services for Malaysian businesses.</p>
         </div>
         <div>
@@ -518,18 +517,7 @@ function HomePage() {
               <AppLink href="/services" className="inline-flex min-h-11 items-center justify-center rounded border border-charcoal/14 bg-white px-7 text-xs font-extrabold uppercase tracking-wide text-charcoal hover:border-signature-red/40">Explore Services <ArrowRight className="ml-2 h-4 w-4" /></AppLink>
             </div>
           </div>
-          <div className="mobile-hero-visual relative mt-8 min-h-[260px] sm:min-h-[320px] lg:mt-0 lg:min-h-[420px]">
-            <div className="absolute inset-0 overflow-hidden rounded-lg border border-charcoal/10 bg-white shadow-2xl shadow-charcoal/10">
-              <img src="/assets/accounting-original.webp" alt="Business discussion and financial reporting" width="1200" height="600" fetchPriority="high" className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 via-transparent to-transparent" />
-            </div>
-            <a href="/services/statutory-audit-assurance" id="hero-widget-audit" className="frosted-widget animate-float-subtle absolute left-3 top-8 w-44 rounded-lg border border-white/70 bg-white/58 p-4 text-left shadow-2xl shadow-signature-yellow/18 backdrop-blur-xl ring-1 ring-signature-yellow/20 sm:w-52 lg:left-[-18px] lg:top-28 lg:w-56 lg:p-5">
-              <p className="text-xs font-bold text-obsidian sm:text-sm">Statutory Audit</p><p className="mt-1 text-[11px] font-medium leading-5 text-charcoal/58 sm:text-xs">Rigorous compliance &amp; assurance.</p>
-            </a>
-            <a href="/services/tax-compliance-advisory" id="hero-widget-tax" className="frosted-widget animate-float-subtle-slow absolute bottom-7 right-3 w-44 rounded-lg border border-white/70 bg-white/58 p-4 text-left shadow-2xl shadow-signature-red/12 backdrop-blur-xl ring-1 ring-champagne/25 sm:w-52 lg:bottom-auto lg:right-[-12px] lg:top-60 lg:w-56 lg:p-5">
-              <p className="text-xs font-bold text-obsidian sm:text-sm">Tax Advisory</p><p className="mt-1 text-[11px] font-medium leading-5 text-charcoal/58 sm:text-xs">Strategic tax planning &amp; compliance.</p>
-            </a>
-          </div>
+          <HeroSlideshow />
         </div>
         <div id="trust-marquee" className="relative overflow-hidden border-y border-charcoal/10 bg-white py-5">
           <div className="animate-trust-marquee flex w-max gap-4 px-4">
