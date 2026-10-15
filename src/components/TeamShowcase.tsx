@@ -6,6 +6,7 @@ type TeamMember = {
   role: string;
   credentials: string;
   bio: string;
+  career?: string;
   image: string;
 };
 
@@ -48,6 +49,7 @@ export function TeamShowcase({ title, description, members }: { title: string; d
               <h3 className="mt-5 font-serif text-3xl leading-snug text-obsidian lg:text-4xl">{person.name}</h3>
               <p className="mt-5 text-sm font-medium leading-7 text-charcoal/85">{person.credentials}</p>
               <p className="mt-6 border-t border-charcoal/15 pt-6 text-base leading-8 text-charcoal/85">{person.bio}</p>
+              {person.career && <p className="mt-4 text-base leading-8 text-charcoal/85">{person.career}</p>}
             </div>
           </article>)}
         </div>

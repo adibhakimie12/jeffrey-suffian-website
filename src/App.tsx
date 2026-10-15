@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowRight, BookOpenCheck, BriefcaseBusiness, Building2, ChevronDown, CircleDollarSign, ExternalLink, Factory, FileCheck2, Landmark, Lightbulb, Mail, MapPin, Menu, Phone, Scale, ShieldCheck, TrendingUp, X } from 'lucide-react';
+import { ArrowRight, BookOpenCheck, BriefcaseBusiness, Building2, ChartNoAxesCombined, ChevronDown, CircleDollarSign, ExternalLink, Factory, FileCheck2, Landmark, Lightbulb, Mail, MapPin, Menu, MessageCircle, Phone, UsersRound, Scale, ShieldCheck, TrendingUp, X } from 'lucide-react';
 import { SITE_URL, OG_IMAGE, canonicalFor, type PageMeta } from './seo';
 import { AnalyticsConsent } from './components/AnalyticsConsent';
 import { EnquiryForm } from './components/EnquiryForm';
@@ -24,9 +24,10 @@ const firm = {
   name: 'Jeffrey Suffian',
   descriptor: 'Chartered Accountants',
   firmNo: 'AF001963',
-  phone: '03 7660 3915 / 3917',
+  phone: '03-7660 3915 / 3917',
   phoneInternational: '+603-7660 3915/3917',
   phoneHref: 'tel:+60376603915',
+  email: 'info@jeffreysuffian.com',
   hours: 'Monday to Friday, 9:00am - 5:00pm',
   address: 'Unit 805, Blok E, Phileo Damansara 1, Jalan 16/11, 46350 Petaling Jaya, Selangor, Malaysia',
   status: 'Approved audit firm and tax agency firm licensed by Ministry of Finance.',
@@ -120,16 +121,16 @@ const services: Service[] = [
   {
     slug: 'corporate-recovery',
     path: '/services/corporate-recovery',
-    title: 'Corporate Recovery & Liquidation Services Malaysia | Jeffrey Suffian',
-    description: 'Corporate recovery, turnaround, voluntary winding up, liquidation, receivership and debt restructuring advisory support.',
+    title: 'Corporate Recovery Services Malaysia | Jeffrey Suffian',
+    description: 'Corporate recovery advisory support including rehabilitation, turnaround, strike-off, debt restructuring and workout assistance.',
     h1: 'Corporate Recovery',
-    seoFocus: 'corporate recovery Malaysia, liquidation services Malaysia',
+    seoFocus: 'corporate recovery Malaysia, debt restructuring Malaysia',
     overview: 'Support for companies facing financial pressure, restructuring needs, recovery processes or closure-related matters.',
-    support: ['Rehabilitation', 'Turnaround support', 'Strike-off', 'Voluntary winding up', 'Court-appointed liquidation', 'Receivership', 'Debt restructuring', 'Workout assistance'],
+    support: ['Rehabilitation', 'Turnaround support', 'Strike-off', 'Debt restructuring', 'Workout assistance'],
     audience: ['Companies under pressure', 'Directors', 'Creditors', 'Stakeholders reviewing recovery options'],
     faqs: [
       { q: 'Can recovery options be reviewed early?', a: 'Yes. Early review can help directors understand available routes and responsibilities.' },
-      { q: 'Do you support winding up matters?', a: 'Yes. The firm supports closure-related matters including voluntary winding up.' },
+      { q: 'Do you support strike-off matters?', a: "Yes. Strike-off support is available as part of the firm's corporate recovery services." },
       { q: 'Is advice confidential?', a: 'Yes. Enquiries are handled professionally and confidentially.' }
     ]
   },
@@ -180,6 +181,7 @@ const people = [
     role: 'Partner',
     credentials: 'C.A.(M), CPA(M), B.Acc (Hons), University of Kent',
     bio: 'Over 25 years of experience in external audit, internal audit, business advisory, corporate governance, risk management, due diligence, forensic and special review investigation.',
+    career: 'Jeffrey started his career with Arthur Andersen and later moved to Ernst & Young before setting up his own firm and founded Jeffrey Suffian.',
     image: '/assets/jeffrey-bosra.webp', id: 'jeffrey-bosra'
   },
   {
@@ -194,6 +196,7 @@ const people = [
     role: 'Partner',
     credentials: 'Audit and assurance specialist',
     bio: 'Audit and assurance experience with specialization in government and public sector engagements.',
+    career: 'Kamarul was a partner at Deloitte prior to joining the team at Jeffrey Suffian.',
     image: '/assets/kamarul-baharin.webp', id: 'kamarul-baharin'
   },
   { name: 'Nurul Elmi Abdul Razak', role: 'Leadership Team', credentials: 'Leadership Team', bio: 'Contact the firm for professional enquiries and engagement coordination.', image: '/assets/nurul-elmi-abdul-razak.webp', id: 'nurul-elmi' },
@@ -330,7 +333,8 @@ export function schemaFor(page: PageMeta, service = services.find((item) => item
     '@id': `${SITE_URL}/#firm`,
     name: firm.name,
     url: SITE_URL,
-    telephone: '+60376603915',
+    telephone: ['+60376603915', '+60376603917'],
+    email: firm.email,
     logo: `${SITE_URL}/assets/jeffrey-suffian-logo.png`,
     image: `${SITE_URL}/assets/jeffrey-suffian-office-signage.webp`,
     identifier: firm.firmNo,
@@ -437,6 +441,7 @@ function Footer() {
           <div className="space-y-3 text-xs leading-6 text-ivory/50">
             <p>{firm.address}</p>
             <p><a href={firm.phoneHref} data-event="phone_click">{firm.phone}</a></p>
+            <p><a href={`mailto:${firm.email}`} data-event="email_click" className="break-words hover:underline">{firm.email}</a></p>
             <p>{firm.hours}</p>
             <p><a href="/privacy-policy">Privacy Policy</a></p>
           </div>
@@ -502,22 +507,32 @@ function CTA({ dark = false, label = 'Need an audit, tax or advisory partner?', 
 function HomePage() {
   return (
     <>
-      <section id="home" className="firm-light-grid firm-backdrop-home bg-paper pt-20 text-charcoal">
-        <div className="mx-auto grid min-h-[680px] max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:py-24">
-          <div>
+      <section id="home" className="signature-hero-section text-charcoal">
+        <div className="signature-hero-shell">
+        <div className="signature-hero-panel">
+          <svg aria-hidden="true" width="0" height="0" className="absolute"><defs><clipPath id="hero-panel-notch" clipPathUnits="objectBoundingBox"><path d="M.035 0 H.965 Q1 0 1 .068 V.932 Q1 1 .965 1 H.035 Q0 1 0 .932 V.78 C0 .72 .055 .75 .055 .68 V.44 C.055 .36 0 .39 0 .31 V.068 Q0 0 .035 0Z" /></clipPath></defs></svg>
+          <svg aria-hidden="true" viewBox="0 0 1000 1000" preserveAspectRatio="none" className="hero-notch-outline"><path d="M0 310 C0 390 55 360 55 440 V680 C55 750 0 720 0 780" vectorEffect="non-scaling-stroke" /></svg>
+          <svg aria-hidden="true" viewBox="0 0 1500 720" preserveAspectRatio="none" className="hero-contour-lines"><path d="M-80 100 C220 80 130 -100 420 -100 M-100 560 C140 450 80 810 420 740 S820 700 950 640 S1260 600 1540 520" /><path d="M-70 570 C150 460 90 820 430 750 S830 710 960 650 S1270 610 1550 530" /></svg>
+          <div className="hero-copy">
             <div className="mb-7 inline-flex rounded border border-signature-red/15 bg-white px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-signature-red shadow-sm">MIA Member Firm AF001963</div>
-            <h1 className="max-w-2xl font-serif text-[2.45rem] font-bold leading-[1.02] text-obsidian sm:text-[3.55rem] lg:text-[4rem]">
+            <h1 className="hero-heading max-w-2xl font-serif font-bold leading-[1.02] text-obsidian">
               <span className="sr-only">Partner-Led Audit, Tax &amp; Advisory for Malaysian Businesses.</span>
               <span aria-hidden="true" className="block">Partner-Led</span><HeroTypingWord />
             </h1>
             <p className="mt-4 max-w-xl text-[0.82rem] font-semibold uppercase tracking-[0.16em] text-charcoal/70 sm:text-[0.9rem]">for Malaysian Businesses.</p>
-            <p className="mt-6 max-w-xl text-[1.02rem] font-medium leading-8 text-charcoal/80">Clarity for your accounts. Confidence in your next decision. Partner-led audit, tax and advisory support from our team in Petaling Jaya.</p>
+            <p className="hero-introduction mt-6 max-w-xl text-[1.02rem] font-medium leading-8 text-charcoal/80">Clarity for your accounts. Confidence in your next decision. Partner-led audit, tax and advisory support from our team in Petaling Jaya.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <AppLink href="/contact" event="request_consultation_click" className="flex min-h-11 items-center justify-center rounded bg-signature-yellow px-7 text-xs font-extrabold uppercase tracking-wide text-obsidian shadow-lg shadow-signature-yellow/20">Request Consultation</AppLink>
-              <AppLink href="/services" className="inline-flex min-h-11 items-center justify-center rounded border border-charcoal/14 bg-white px-7 text-xs font-extrabold uppercase tracking-wide text-charcoal hover:border-signature-red/40">Explore Services <ArrowRight className="ml-2 h-4 w-4" /></AppLink>
+              <AppLink href="/contact" event="request_consultation_click" className="flex min-h-11 items-center justify-center rounded-full bg-signature-yellow px-7 text-xs font-extrabold uppercase tracking-wide text-obsidian shadow-lg shadow-signature-yellow/20">Request Consultation</AppLink>
+              <AppLink href="/services" className="inline-flex min-h-11 items-center justify-center rounded-full border border-charcoal/14 bg-white px-7 text-xs font-extrabold uppercase tracking-wide text-charcoal hover:border-signature-red/40">Explore Services <ArrowRight className="ml-2 h-4 w-4" /></AppLink>
             </div>
           </div>
           <HeroSlideshow />
+        </div>
+        <nav aria-label="Hero shortcuts" className="hero-side-shortcuts">
+          <a href="/services" aria-label="Explore our services" title="Services"><ChartNoAxesCombined aria-hidden="true" className="h-5 w-5" /></a>
+          <a href="/our-people" aria-label="Meet our team" title="Our Team"><UsersRound aria-hidden="true" className="h-5 w-5" /></a>
+          <a href="/contact" aria-label="Contact our office" title="Contact"><MessageCircle aria-hidden="true" className="h-5 w-5" /></a>
+        </nav>
         </div>
         <div id="trust-marquee" className="relative overflow-hidden border-y border-charcoal/10 bg-white py-5">
           <div className="animate-trust-marquee flex w-max gap-4 px-4">
@@ -609,7 +624,7 @@ function AboutPage({ page }: { page: PageMeta }) {
   ] as const;
   return <>
     <section className="firm-backdrop bg-paper pt-28 text-charcoal"><div className="mx-auto max-w-7xl px-5 py-14 lg:px-8 lg:py-20"><Breadcrumbs page={page} /><div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"><div><div className="brand-accent-strip mb-7 h-1 w-24 rounded-full" /><p className="text-xs font-bold uppercase tracking-widest text-signature-red">Get to know our firm</p><h1 className="mt-4 font-serif text-4xl font-bold leading-tight text-obsidian sm:text-5xl">About Jeffrey Suffian</h1><p className="mt-6 text-lg leading-8 text-charcoal/85">Chartered Accountants in Petaling Jaya, supporting Malaysian businesses with audit, tax and financial advisory expertise.</p><p className="mt-5 text-base leading-8 text-charcoal/80">From statutory obligations to important business decisions, our partners bring professional experience and a practical perspective to your requirements.</p><a href="/our-people" className="mt-6 inline-flex min-h-11 items-center gap-3 text-sm font-bold text-obsidian">Meet our partners <ArrowRight className="h-4 w-4" /></a></div><figure className="overflow-hidden rounded-xl border border-charcoal/10 bg-white"><img src="/assets/about-accounting-workspace-ai.webp" width="1200" height="800" alt="Illustrative accounting workspace with financial reports, calculator and laptop" fetchPriority="high" className="aspect-[3/2] w-full object-cover" /><figcaption className="px-6 py-5 text-sm leading-6 text-charcoal/80">Audit, tax and advisory. Based in Petaling Jaya, Selangor.</figcaption></figure></div><div className="mt-10 border-t border-charcoal/15 pt-7"><TrustBadges /></div></div></section>
-    <Section tone="white"><div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-bold uppercase tracking-widest text-signature-red">Our firm</p><h2 className="mt-4 font-serif text-3xl leading-tight sm:text-4xl">Professional foundations.<br /><span className="italic">Practical support.</span></h2></div><div className="space-y-5 text-base leading-8 text-charcoal/80"><p>JEFFREY SUFFIAN (AF001963) is an approved audit firm and tax agency firm licensed by the Ministry of Finance. {firm.member}</p><p>Our professional services include assurance, taxation, business advisory, due diligence review, liquidation, corporate recovery and investigation, internal audit and related financial advisory engagements.</p><p>Based in Petaling Jaya, Selangor, our team supports businesses with compliance requirements and financial decisions.</p><figure className="overflow-hidden rounded-lg border border-charcoal/10"><img src="/assets/accountants-report-original.webp" alt="Jeffrey Suffian accountants report and financial reporting documents" width="1200" height="221" loading="lazy" decoding="async" className="w-full" /></figure></div></div></Section>
+    <Section tone="white"><div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-xs font-bold uppercase tracking-widest text-signature-red">Our firm</p><h2 className="mt-4 font-serif text-3xl leading-tight sm:text-4xl">Professional foundations.<br /><span className="italic">Practical support.</span></h2></div><div className="space-y-5 text-base leading-8 text-charcoal/80"><p>JEFFREY SUFFIAN (AF001963) is an approved audit firm and tax agency firm licensed by the Ministry of Finance. {firm.member}</p><p>Our professional services include assurance, taxation, business advisory, due diligence review, corporate recovery and investigation, internal audit and related financial advisory engagements.</p><p>Based in Petaling Jaya, Selangor, our team supports businesses with compliance requirements and financial decisions.</p><figure className="overflow-hidden rounded-lg border border-charcoal/10"><img src="/assets/accountants-report-original.webp" alt="Jeffrey Suffian accountants report and financial reporting documents" width="1200" height="221" loading="lazy" decoding="async" className="w-full" /></figure></div></div></Section>
     <Section><div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="text-xs font-bold uppercase tracking-widest text-signature-red">Our expertise</p><h2 className="mt-4 font-serif text-3xl leading-tight sm:text-4xl">Support for the decisions ahead.</h2></div><a href="/services" className="inline-flex min-h-11 items-center gap-3 text-sm font-bold">View all services <ArrowRight className="h-4 w-4" /></a></div><div className="mt-9 grid gap-5 md:grid-cols-3">{[
       ['Audit & assurance', 'Independent audit and assurance support for reliable financial reporting.', '/services/statutory-audit-assurance'],
       ['Tax compliance & advisory', 'Support with tax computations, returns, planning and compliance matters.', '/services/tax-compliance-advisory'],
@@ -671,18 +686,19 @@ function ContactPage({ page }: { page: PageMeta }) {
       <Breadcrumbs page={page} />
       <div className="mt-9 grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
         <div><p className="text-xs font-bold uppercase tracking-widest text-signature-red">Contact Jeffrey Suffian</p><h1 className="mt-4 font-serif text-4xl leading-tight text-obsidian sm:text-5xl">Let’s talk about<br /><span className="italic text-signature-red">your business.</span></h1></div>
-        <div><p className="max-w-xl text-lg leading-8 text-charcoal/85">An audit to prepare for. A tax question to work through. A business decision ahead. Start with what matters to you.</p><a href={firm.phoneHref} data-event="phone_click" className="mt-5 inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/15 bg-white px-5 py-3 text-sm font-bold text-obsidian"><Phone aria-hidden="true" className="h-4 w-4 text-signature-red" />03 7660 3915<ArrowRight aria-hidden="true" className="h-4 w-4" /></a><p className="mt-3 text-sm leading-7 text-charcoal/80">{firm.hours}</p></div>
+        <div><p className="max-w-xl text-lg leading-8 text-charcoal/85">An audit to prepare for. A tax question to work through. A business decision ahead. Start with what matters to you.</p><a href={firm.phoneHref} data-event="phone_click" className="mt-5 inline-flex min-h-12 items-center gap-3 rounded-full border border-charcoal/15 bg-white px-5 py-3 text-sm font-bold text-obsidian"><Phone aria-hidden="true" className="h-4 w-4 text-signature-red" />03-7660 3915<ArrowRight aria-hidden="true" className="h-4 w-4" /></a><p className="mt-3 text-sm leading-7 text-charcoal/80">{firm.hours}</p></div>
       </div>
     </div></section>
     <section className="firm-section-dots bg-paper pb-16 lg:pb-20"><div className="mx-auto grid max-w-7xl items-start gap-7 px-5 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.85fr)] lg:gap-10 lg:px-8">
-      <EnquiryForm />
+      <EnquiryForm email={firm.email} />
       <aside aria-label="Office and contact information" className="min-w-0 space-y-6 lg:sticky lg:top-28">
         <div data-contact-reveal className="overflow-hidden rounded-2xl border border-charcoal/15 bg-white">
           <img src="/assets/jeffrey-suffian-office-signage.webp" alt="Jeffrey Suffian Chartered Accountants office signage" width="1000" height="750" loading="lazy" decoding="async" className="aspect-[16/8] w-full object-cover" />
           <div className="p-6 sm:p-8"><p className="text-xs font-bold uppercase tracking-widest text-signature-red">Our office</p><h2 className="mt-4 font-serif text-3xl leading-snug text-obsidian">Based in Petaling Jaya.<br /><span className="italic">Here for your business.</span></h2>
             <div className="mt-6 flex items-start gap-3 border-t border-charcoal/10 pt-6"><MapPin aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div><h3 className="text-sm font-semibold">Visit us</h3><address className="mt-2 text-sm not-italic leading-7 text-charcoal/85">{firm.address}</address></div></div>
             <div className="mt-5 flex items-start gap-3"><BookOpenCheck aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div><h3 className="text-sm font-semibold">Office hours</h3><p className="mt-2 text-sm leading-7 text-charcoal/85">{firm.hours}<br />Saturday &amp; Sunday: closed</p></div></div>
-            <div className="mt-5 flex items-start gap-3"><Phone aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div><h3 className="text-sm font-semibold">Prefer a conversation?</h3><div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm font-semibold"><a href={firm.phoneHref} data-event="phone_click" className="inline-flex min-h-11 items-center underline underline-offset-4">03 7660 3915</a><span aria-hidden="true">/</span><a href="tel:+60376603917" data-event="phone_click" className="inline-flex min-h-11 items-center underline underline-offset-4">03 7660 3917</a></div></div></div>
+            <div className="mt-5 flex items-start gap-3"><Phone aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div><h3 className="text-sm font-semibold">Prefer a conversation?</h3><div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm font-semibold"><a href={firm.phoneHref} data-event="phone_click" className="inline-flex min-h-11 items-center underline underline-offset-4">03-7660 3915</a><span aria-hidden="true">/</span><a href="tel:+60376603917" data-event="phone_click" className="inline-flex min-h-11 items-center underline underline-offset-4">03-7660 3917</a></div></div></div>
+            <div className="mt-4 flex items-start gap-3"><Mail aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div className="min-w-0"><h3 className="text-sm font-semibold">Email our office</h3><a href={`mailto:${firm.email}`} data-event="email_click" className="mt-1 inline-flex min-h-11 max-w-full items-center break-all text-sm font-semibold underline underline-offset-4">{firm.email}</a></div></div>
           </div>
         </div>
         <LocationPanel />

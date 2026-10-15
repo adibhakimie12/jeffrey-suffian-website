@@ -171,11 +171,87 @@ html { scroll-padding-top: 6rem; }
 }
 
 /* Keep the real team photographs in a stable frame, with restrained motion. */
-.hero-photo-slide { opacity: 0; transition: opacity 900ms ease; }
+.hero-photo-slide { opacity: 0; transition: opacity 700ms ease; }
 .hero-photo-slide.is-active { opacity: 1; }
-.hero-photo-image { transform: scale(1); transition: transform 7000ms linear; }
-.hero-photo-slide.is-active .hero-photo-image { transform: scale(1.045); }
+.hero-photo-image { transform: scale(1); transition: transform 3600ms ease-out; }
+.hero-photo-slide.is-active .hero-photo-image { transform: scale(1.035); }
 @media (prefers-reduced-motion: reduce) {
   .hero-photo-slide, .hero-photo-image { transition: none; }
   .hero-photo-slide.is-active .hero-photo-image { transform: none; }
 }
+
+/* Ivory editorial hero: live copy, organic photograph mask and stable service links. */
+.signature-hero-section { background: radial-gradient(ellipse at 92% 12%, #f1e7cc 0, transparent 52%), #f6f3ed; padding-top: 116px; }
+.signature-hero-panel { position: relative; isolation: isolate; max-width: 1536px; margin: 0 32px 36px; overflow: hidden; border: 1px solid rgba(255,255,255,.95); border-radius: 44px; background: #fcfaf5; box-shadow: 0 24px 70px -40px rgba(85,68,37,.25); }
+.signature-hero-panel::before { content: ''; pointer-events: none; position: absolute; z-index: 2; inset: 0; background: radial-gradient(ellipse at 6% 0, rgba(255,255,255,.95), transparent 60%), radial-gradient(ellipse at 20% 100%, rgba(237,227,204,.35), transparent 45%); }
+.hero-contour-lines { position: absolute; z-index: 3; pointer-events: none; inset: 0; width: 100%; height: 100%; fill: none; stroke: #d5b975; stroke-width: .8; opacity: .4; }
+.hero-copy { position: relative; z-index: 10; padding: 52px 28px 24px; }
+.hero-heading { font-size: clamp(2.45rem, 4.8vw, 4.7rem); }
+.hero-introduction::before { content: ''; display: block; width: 60px; height: 2px; background: #F2B705; margin-bottom: 20px; }
+.hero-visual { position: relative; min-width: 0; padding: 0 16px 18px; }
+.hero-photo-window { position: relative; aspect-ratio: 1.18; overflow: hidden; border-radius: 30px 30px 70px 30px; background: #e9e0cf; }
+.hero-photo-image { object-position: 66% 50%; }
+.hero-carousel-controls { position: relative; z-index: 20; display: flex; align-items: center; justify-content: center; width: max-content; max-width: 100%; margin: -26px auto 16px; padding: 2px 6px; border: 1px solid rgba(43,43,43,.08); border-radius: 999px; background: rgba(255,255,255,.94); box-shadow: 0 7px 24px rgba(43,43,43,.08); backdrop-filter: blur(14px); }
+.hero-control-button { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; color: #2b2b2b; transition: background-color 180ms ease; }
+.hero-control-button:hover { background: #f4f1ea; }
+.hero-service-links { position: relative; z-index: 20; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.hero-service-link { display: flex; min-height: 54px; align-items: center; justify-content: space-between; gap: 8px; border: 1px solid rgba(43,43,43,.1); border-radius: 12px; padding: 12px 14px; background: rgba(255,255,255,.95); color: #111; font-size: 11px; font-weight: 700; box-shadow: 0 8px 28px -18px rgba(43,43,43,.25); transition: border-color 200ms ease, transform 200ms ease; }
+.hero-service-link:hover { border-color: rgba(181,30,35,.4); }
+@media (min-width: 1024px) {
+  .signature-hero-panel { min-height: 650px; }
+  .hero-copy { display: flex; min-height: 650px; width: 49%; flex-direction: column; justify-content: center; padding: 64px 16px 72px 6.5%; }
+  .hero-copy > .inline-flex { align-self: flex-start; }
+  .hero-visual { position: absolute; z-index: 1; inset: 0 0 0 auto; width: 65%; padding: 0; }
+  .hero-photo-window { position: absolute; inset: 0 0 10px; aspect-ratio: auto; border-radius: 0; clip-path: url(#hero-photo-curve); -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 9%, #000 25%); mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 9%, #000 25%); }
+  .hero-photo-image { object-position: 65% 50%; }
+  .hero-carousel-controls { position: absolute; top: 20px; right: 24px; margin: 0; }
+  .hero-service-links { position: absolute; bottom: 28px; left: 25%; right: 28px; }
+  .hero-service-link { min-height: 60px; font-size: 12px; padding: 16px 20px; }
+}
+@media (min-width: 1600px) { .signature-hero-panel { margin-left: auto; margin-right: auto; } }
+@media (max-width: 639px) {
+  .signature-hero-section { padding-top: 104px; }
+  .signature-hero-panel { margin: 0 12px 24px; border-radius: 28px; }
+  .hero-copy { padding: 36px 20px 24px; }
+  .hero-heading { font-size: clamp(2rem, 9.4vw, 2.8rem); }
+  .hero-copy .hero-typing-word { min-width: 0; }
+  .hero-introduction { font-size: .94rem; line-height: 1.75; }
+  .hero-visual { padding: 0 10px 12px; }
+  .hero-photo-window { aspect-ratio: 1.25; border-radius: 22px 22px 50px 22px; }
+  .hero-service-link { font-size: 10px; padding: 12px 10px; }
+}
+
+/* Side recess mirrors the reference and holds three real navigation links. */
+.signature-hero-shell { position: relative; max-width: 1600px; margin-inline: auto; }
+.hero-side-shortcuts, .hero-notch-outline { display: none; }
+@media (min-width: 1024px) {
+  .signature-hero-panel { clip-path: url(#hero-panel-notch); }
+  .hero-notch-outline { display: block; pointer-events: none; position: absolute; z-index: 4; inset: 0; width: 100%; height: 100%; fill: none; stroke: rgba(255,255,255,.95); stroke-width: 1.3px; }
+  .hero-side-shortcuts { display: flex; position: absolute; z-index: 25; left: 38px; top: 55%; transform: translateY(-50%); flex-direction: column; gap: 10px; }
+  .hero-side-shortcuts a { display: flex; width: 44px; height: 44px; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.95); border-radius: 13px; color: #4c4c48; background: #fff; box-shadow: 0 6px 20px -12px rgba(43,43,43,.25); transition: color 180ms ease, box-shadow 180ms ease; }
+  .hero-side-shortcuts a:hover { color: #B51E23; box-shadow: 0 8px 22px -12px rgba(181,30,35,.35); }
+}
+
+.hero-photo-frame { display: none; }
+@media (min-width: 1024px) {
+  .hero-photo-window { bottom: 82px; }
+  .hero-photo-image { object-position: 65% 0%; transform-origin: 50% 30%; }
+  .hero-photo-frame { display: block; pointer-events: none; position: absolute; z-index: 5; inset: 0 0 82px; width: 100%; height: calc(100% - 82px); overflow: visible; fill: none; }
+  .hero-photo-frame-band { stroke: #fcfaf5; stroke-width: 24px; }
+  .hero-photo-frame-line { stroke: rgba(208,170,81,.65); stroke-width: .8px; }
+}
+
+@media (min-width: 1024px) {
+  .hero-copy > div:last-child { flex-wrap: wrap; }
+  .hero-copy > div:last-child a { white-space: nowrap; }
+  .hero-photo-frame { -webkit-mask-image: linear-gradient(90deg, transparent, rgba(0,0,0,.4) 24%, #000 45%); mask-image: linear-gradient(90deg, transparent, rgba(0,0,0,.4) 24%, #000 45%); }
+  .hero-carousel-controls { top: auto; bottom: 100px; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-heading { font-size: 3.4rem; }
+  .hero-copy { padding-bottom: 32px; }
+  .hero-photo-window { aspect-ratio: 1.5; }
+}
+
+/* Solid brand red stays legible inside SVG-clipped panels across browsers. */
+.hero-copy .hero-typing-word { color: #B51E23; background-image: none; -webkit-text-fill-color: currentColor; }
