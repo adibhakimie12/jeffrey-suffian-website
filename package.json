@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build && node scripts/prerender.mjs",
+    "test:enquiry": "node --experimental-strip-types --test tests/enquiry.test.mjs",
     "test:seo": "node --test tests/seo-build.test.mjs",
     "test:measurement": "node --experimental-strip-types --test tests/measurement.test.mjs",
     "preview": "vite preview",

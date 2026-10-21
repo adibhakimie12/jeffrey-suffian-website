@@ -1,6 +1,7 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "functions": { "api/enquiry.ts": { "maxDuration": 15 } },
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [

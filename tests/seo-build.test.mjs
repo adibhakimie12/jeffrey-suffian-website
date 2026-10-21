@@ -114,17 +114,17 @@ test('sitemap and robots use the original non-www domain', async () => {
   assert.match(await read('robots.txt'), /Sitemap: https:\/\/jeffreysuffian\.com\/sitemap.xml/);
 });
 
-test('unconfigured enquiry page shows the form with an honest delivery notice and phone contact', async () => {
+test('configured enquiry page exposes the form with consent and alternative phone contact', async () => {
   const html = await read('contact.html');
   assert.match(html, /href="tel:\+60376603915"/);
   assert.ok(!html.includes('data-event="contact_form_submit"'), 'do not count a button click as a submitted lead');
-  assert.match(html, /Call to discuss your enquiry/);
+  assert.match(html, /Your details will be used to respond to your enquiry/);
   assert.match(html, /<form[^>]+aria-labelledby="enquiry-heading"/);
   for (const field of ['name', 'company', 'email', 'phone', 'service', 'message', 'consent']) {
     assert.ok(html.includes(`name="${field}"`), field);
   }
-  assert.match(html, /Online enquiries are not available yet/);
-  assert.match(html, /<button[^>]+type="submit"[^>]+disabled=""/);
+  assert.ok(!html.includes('Online enquiries are not available yet'));
+  assert.ok(!/<button[^>]+type="submit"[^>]+disabled=""/.test(html));
 });
 
 test('404 is noindex and insights do not advertise missing articles', async () => {

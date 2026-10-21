@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { trackEvent } from './AnalyticsConsent';
 import { ArrowUpRight, LockKeyhole, Phone } from 'lucide-react';
 
-// A first-party endpoint is supplied by the client's hosting/backend setup.
-const endpoint = import.meta.env.VITE_ENQUIRY_ENDPOINT ?? '';
+// Vercel Function keeps Resend credentials on the server. Explicit blank disables the form.
+const endpoint = import.meta.env.VITE_ENQUIRY_ENDPOINT ?? '/api/enquiry';
 const ready = /^\/(?!\/)[a-zA-Z0-9/_-]+$/.test(endpoint);
 const serviceNames = ['Statutory Audit & Assurance', 'Tax Compliance & Advisory', 'Business Advisory', 'Due Diligence & Business Valuation', 'Corporate Recovery', 'Corporate Finance', 'SME Advisory'];
 
@@ -61,7 +61,7 @@ export function EnquiryForm({ email }: { email: string }) {
       <p id="enquiry-guidance" className="mt-3 flex items-start gap-2 text-xs leading-6 text-charcoal/70"><LockKeyhole aria-hidden="true" className="mt-1 h-3.5 w-3.5 shrink-0" />Please do not include passwords, bank details or sensitive financial records.</p>
       <label className="mt-5 flex min-h-11 cursor-pointer items-start gap-3 text-sm leading-6 text-charcoal/80"><input type="checkbox" name="consent" required className="mt-1 h-5 w-5 shrink-0 accent-signature-red" /><span>I agree that my details may be used to respond to this enquiry. <a href="/privacy-policy" className="font-semibold underline underline-offset-4">Privacy policy</a></span></label>
       <button type="submit" disabled={!ready || status === 'sending'} aria-describedby={!ready ? 'enquiry-availability' : undefined} className="mt-6 inline-flex min-h-14 w-full cursor-pointer items-center justify-between gap-3 rounded-xl bg-signature-yellow px-5 py-4 text-sm font-bold text-obsidian transition-colors hover:bg-champagne disabled:cursor-not-allowed disabled:bg-charcoal/15 disabled:text-charcoal/60">{status === 'sending' ? 'Sending enquiry…' : 'Request consultation'}<ArrowUpRight aria-hidden="true" className="h-5 w-5" /></button>
-      <p role={status === 'error' ? 'alert' : 'status'} aria-live="polite" className="mt-4 text-sm leading-6 text-charcoal/80">{status === 'sent' ? 'Thank you. Your enquiry has been received.' : status === 'error' ? 'Your enquiry could not be sent. Please try again or call our office on 03-7660 3915 / 3917.' : ready ? 'Your details will be used to respond to your enquiry.' : 'Call to discuss your enquiry: '} {!ready && <><a href="tel:+60376603915" data-event="phone_click" className="font-semibold underline underline-offset-4">03-7660 3915</a><span> / </span><a href="tel:+60376603917" data-event="phone_click" className="font-semibold underline underline-offset-4">03-7660 3917</a></>}</p>
+      <p role={status === 'error' ? 'alert' : 'status'} aria-live="polite" className="mt-4 text-sm leading-6 text-charcoal/80">{status === 'sent' ? 'Thank you. Your enquiry has been sent to our team.' : status === 'error' ? 'Your enquiry could not be sent. Please try again or call our office on 03-7660 3915 / 3917.' : ready ? 'Your details will be used to respond to your enquiry.' : 'Call to discuss your enquiry: '} {!ready && <><a href="tel:+60376603915" data-event="phone_click" className="font-semibold underline underline-offset-4">03-7660 3915</a><span> / </span><a href="tel:+60376603917" data-event="phone_click" className="font-semibold underline underline-offset-4">03-7660 3917</a></>}</p>
     </form>
   </div>;
 }
