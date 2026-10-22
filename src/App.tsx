@@ -11,6 +11,7 @@ import { TeamShowcase } from './components/TeamShowcase';
 import { HeroSlideshow } from './components/HeroSlideshow';
 import { FloatingContact } from './components/FloatingContact';
 import { WhatsAppIcon } from './components/WhatsAppIcon';
+import { GoogleReviewBadge } from './components/GoogleReviewBadge';
 
 
 type Service = PageMeta & {
@@ -30,14 +31,14 @@ const firm = {
   phoneInternational: '+603-7660 3915/3917',
   phoneHref: 'tel:+60376603915',
   email: 'info@jeffreysuffian.com',
-  whatsApp: '017-632 9754',
+  whatsApp: '+60 10-225 5023',
   hours: 'Monday to Friday, 9:00am - 5:00pm',
   address: 'Unit 805, Blok E, Phileo Damansara 1, Jalan 16/11, 46350 Petaling Jaya, Selangor, Malaysia',
   status: 'Approved audit firm and tax agency firm licensed by Ministry of Finance.',
   member: 'Member firm of the Malaysian Institute of Accountants.'
 };
 
-const whatsAppUrl = `https://wa.me/60176329754?text=${encodeURIComponent('Hi Jeffrey Suffian, I would like to enquire about your services.')}`;
+const whatsAppUrl = `https://wa.me/60102255023?text=${encodeURIComponent('Hi Jeffrey Suffian, I would like to enquire about your services.')}`;
 const encodedAddress = encodeURIComponent(firm.address);
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
 const wazeUrl = `https://waze.com/ul?q=${encodedAddress}&navigate=yes`;
@@ -526,10 +527,11 @@ function HomePage() {
             </h1>
             <p className="mt-4 max-w-xl text-[0.82rem] font-semibold uppercase tracking-[0.16em] text-charcoal/70 sm:text-[0.9rem]">for Malaysian Businesses.</p>
             <p className="hero-introduction mt-6 max-w-xl text-[1.02rem] font-medium leading-8 text-charcoal/80">Clarity for your accounts. Confidence in your next decision. Partner-led audit, tax and advisory support from our team in Petaling Jaya.</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="hero-actions mt-8 flex flex-col gap-3 sm:flex-row">
               <AppLink href="/contact" event="request_consultation_click" className="flex min-h-11 items-center justify-center rounded-full bg-signature-yellow px-7 text-xs font-extrabold uppercase tracking-wide text-obsidian shadow-lg shadow-signature-yellow/20">Request Consultation</AppLink>
               <AppLink href="/services" className="inline-flex min-h-11 items-center justify-center rounded-full border border-charcoal/14 bg-white px-7 text-xs font-extrabold uppercase tracking-wide text-charcoal hover:border-signature-red/40">Explore Services <ArrowRight className="ml-2 h-4 w-4" /></AppLink>
             </div>
+            <div className="mt-5"><GoogleReviewBadge /></div>
           </div>
           <HeroSlideshow />
         </div>
@@ -705,6 +707,7 @@ function ContactPage({ page }: { page: PageMeta }) {
         <div data-contact-reveal className="overflow-hidden rounded-2xl border border-charcoal/15 bg-white">
           <img src="/assets/jeffrey-suffian-office-signage.webp" alt="Jeffrey Suffian Chartered Accountants office signage" width="1000" height="750" loading="lazy" decoding="async" className="aspect-[16/8] w-full object-cover" />
           <div className="p-6 sm:p-8"><p className="text-xs font-bold uppercase tracking-widest text-signature-red">Our office</p><h2 className="mt-4 font-serif text-3xl leading-snug text-obsidian">Based in Petaling Jaya.<br /><span className="italic">Here for your business.</span></h2>
+            <div className="mt-5"><GoogleReviewBadge /></div>
             <div className="mt-6 flex items-start gap-3 border-t border-charcoal/10 pt-6"><MapPin aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div><h3 className="text-sm font-semibold">Visit us</h3><address className="mt-2 text-sm not-italic leading-7 text-charcoal/85">{firm.address}</address></div></div>
             <div className="mt-5 flex items-start gap-3"><BookOpenCheck aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div><h3 className="text-sm font-semibold">Office hours</h3><p className="mt-2 text-sm leading-7 text-charcoal/85">{firm.hours}<br />Saturday &amp; Sunday: closed</p></div></div>
             <div className="mt-5 flex items-start gap-3"><Phone aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signature-red" /><div><h3 className="text-sm font-semibold">Prefer a conversation?</h3><div className="mt-1 flex flex-wrap items-center gap-x-3 text-sm font-semibold"><a href={firm.phoneHref} data-event="phone_click" className="inline-flex min-h-11 items-center underline underline-offset-4">03-7660 3915</a><span aria-hidden="true">/</span><a href="tel:+60376603917" data-event="phone_click" className="inline-flex min-h-11 items-center underline underline-offset-4">03-7660 3917</a></div></div></div>
